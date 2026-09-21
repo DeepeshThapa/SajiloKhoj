@@ -73,9 +73,10 @@ export default function TechnicianDashboardPage() {
 
   const loadData = async () => {
     setIsLoading(true);
-    const [reqRes, notifRes] = await Promise.all([
+    const [reqRes, notifRes, profileRes] = await Promise.all([
       getTechnicianRequests(statusFilter),
       getUserNotifications(),
+      getMyTechnicianProfile(),
     ]);
 
     if (reqRes.success && reqRes.data) {
@@ -85,9 +86,8 @@ export default function TechnicianDashboardPage() {
       setNotifications(notifRes.data);
     }
 
-    // Try fetching technician profile data
-    if (reqRes.data && reqRes.data[0]?.technicianProfile) {
-      const p = reqRes.data[0].technicianProfile;
+    if (profileRes.success && profileRes.data) {
+      const p = profileRes.data;
       setProfile(p);
       setAvailability(p.availability);
       setBio(p.bio || '');

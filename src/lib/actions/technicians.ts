@@ -390,9 +390,47 @@ export async function deleteTechnicianService(serviceId: string) {
     revalidatePath('/dashboard/technician');
     revalidatePath(`/technicians/${profile.id}`);
 
-    return { success: true, message: 'Service removed successfully' };
+export async function getMyTechnicianProfile() {
+  try {
+    const session = await getSession();
+    if (!session || session.role !== 'TECHNICIAN') {
+      return { success: false, error: 'Unauthorized' };
+    }
+
+    const profile = await prisma.technicianProfile.findUnique({
+      where: { userId: session.id },
+      include: {
+        user: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+            phone: true,
+            avatar: true,
+          },
+        },
+        category: true,
+        services: true,
+        reviews: {
+          include: {
+            customer: {
+              select: {
+                name: true,
+                avatar: true,
+              },
+            },
+          },
+          orderBy: { createdAt: 'desc' },
+        },
+      },
+    });
+
+    if (!profile) return { success: false, error: 'Profile not found' };
+
+    return { success: true, data: profile };
   } catch (error: any) {
-    console.error('deleteTechnicianService error:', error);
+    console.error('getMyTechnicianProfile error:', error);
     return { success: false, error: error.message };
   }
 }
+
