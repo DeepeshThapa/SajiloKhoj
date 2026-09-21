@@ -8,6 +8,7 @@ const key = new TextEncoder().encode(SECRET_KEY);
 export const SESSION_COOKIE_NAME = 'sajilo_session';
 
 export interface SessionPayload {
+  id: string;
   userId: string;
   email: string;
   name: string;
@@ -29,7 +30,15 @@ export async function decryptSession(sessionToken: string): Promise<SessionPaylo
     const { payload } = await jwtVerify(sessionToken, key, {
       algorithms: ['HS256'],
     });
-    return payload as unknown as SessionPayload;
+    const p = payload as any;
+    return {
+      id: p.id || p.userId,
+      userId: p.userId || p.id,
+      email: p.email,
+      name: p.name,
+      role: p.role,
+      expiresAt: p.expiresAt,
+    };
   } catch {
     return null;
   }
@@ -37,6 +46,7 @@ export async function decryptSession(sessionToken: string): Promise<SessionPaylo
 
 export async function createSession(user: { id: string; email: string; name: string; role: Role }) {
   const token = await encryptSession({
+    id: user.id,
     userId: user.id,
     email: user.email,
     name: user.name,
