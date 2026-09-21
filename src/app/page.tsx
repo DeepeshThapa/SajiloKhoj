@@ -9,7 +9,6 @@ import {
   Hammer,
   Paintbrush,
   Sparkles,
-  Tool,
   Search,
   MapPin,
   ShieldCheck,
@@ -45,7 +44,7 @@ export default async function HomePage() {
     carpentry: Hammer,
     painting: Paintbrush,
     cleaning: Sparkles,
-    handyman: Tool,
+    handyman: Hammer,
   };
 
   const cities = [

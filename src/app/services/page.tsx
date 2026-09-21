@@ -8,7 +8,6 @@ import {
   Hammer,
   Paintbrush,
   Sparkles,
-  Tool,
   ArrowRight,
   ShieldCheck,
   CheckCircle,
@@ -28,7 +27,7 @@ export default async function ServicesPage() {
     carpentry: Hammer,
     painting: Paintbrush,
     cleaning: Sparkles,
-    handyman: Tool,
+    handyman: Hammer,
   };
 
   const serviceHighlights: Record<string, { typical: string[]; avgStarting: string }> = {

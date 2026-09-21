@@ -31,6 +31,7 @@ import {
   addTechnicianService,
   deleteTechnicianService,
   getTechnicianById,
+  getMyTechnicianProfile,
 } from '@/lib/actions/technicians';
 import { replyToReview } from '@/lib/actions/reviews';
 import { getUserNotifications } from '@/lib/actions/notifications';

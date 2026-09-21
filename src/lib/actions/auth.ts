@@ -18,7 +18,8 @@ export async function loginUser(input: LoginInput): Promise<ActionResponse> {
   try {
     const validated = loginSchema.safeParse(input);
     if (!validated.success) {
-      return { success: false, error: validated.error.errors[0]?.message || 'Invalid input' };
+      const err = (validated.error as any).issues?.[0]?.message || (validated.error as any).errors?.[0]?.message || 'Invalid input data';
+      return { success: false, error: err };
     }
 
     const { email, password } = validated.data;
@@ -79,7 +80,8 @@ export async function registerCustomer(input: CustomerRegisterInput): Promise<Ac
   try {
     const validated = customerRegisterSchema.safeParse(input);
     if (!validated.success) {
-      return { success: false, error: validated.error.errors[0]?.message || 'Invalid input data' };
+      const err = (validated.error as any).issues?.[0]?.message || (validated.error as any).errors?.[0]?.message || 'Invalid input data';
+      return { success: false, error: err };
     }
 
     const { name, email, phone, password } = validated.data;
@@ -136,7 +138,8 @@ export async function registerTechnician(input: TechnicianRegisterInput): Promis
   try {
     const validated = technicianRegisterSchema.safeParse(input);
     if (!validated.success) {
-      return { success: false, error: validated.error.errors[0]?.message || 'Invalid input data' };
+      const err = (validated.error as any).issues?.[0]?.message || (validated.error as any).errors?.[0]?.message || 'Invalid input data';
+      return { success: false, error: err };
     }
 
     const data = validated.data;

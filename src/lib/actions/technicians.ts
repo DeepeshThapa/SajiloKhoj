@@ -390,6 +390,13 @@ export async function deleteTechnicianService(serviceId: string) {
     revalidatePath('/dashboard/technician');
     revalidatePath(`/technicians/${profile.id}`);
 
+    return { success: true, message: 'Service removed successfully' };
+  } catch (error: any) {
+    console.error('deleteTechnicianService error:', error);
+    return { success: false, error: error.message };
+  }
+}
+
 export async function getMyTechnicianProfile() {
   try {
     const session = await getSession();
