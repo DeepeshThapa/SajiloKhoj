@@ -1,0 +1,264 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  CUSTOMER
+  TECHNICIAN
+  ADMIN
+}
+
+enum UserStatus {
+  ACTIVE
+  SUSPENDED
+  PENDING
+}
+
+enum VerificationStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  SUSPENDED
+}
+
+enum Availability {
+  AVAILABLE_NOW
+  AVAILABLE_TODAY
+  AVAILABLE_THIS_WEEK
+  BUSY
+  OFF_DUTY
+}
+
+enum RequestStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+enum LocationType {
+  PROVINCE
+  DISTRICT
+  CITY
+  LOCALITY
+}
+
+model User {
+  id           String      @id @default(cuid())
+  name         String
+  email        String      @unique
+  phone        String?
+  passwordHash String
+  role         Role        @default(CUSTOMER)
+  status       UserStatus  @default(ACTIVE)
+  avatar       String?
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+
+  technicianProfile TechnicianProfile?
+  serviceRequests   ServiceRequest[]    @relation("CustomerRequests")
+  reviews           Review[]            @relation("CustomerReviews")
+  favorites         Favorite[]          @relation("CustomerFavorites")
+  notifications     Notification[]
+  adminLogs         AdminLog[]
+
+  @@index([role])
+  @@index([status])
+}
+
+model TechnicianProfile {
+  id                 String             @id @default(cuid())
+  userId             String             @unique
+  user               User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  categoryId         String
+  category           Category           @relation(fields: [categoryId], references: [id])
+  
+  bio                String             @db.Text
+  businessName       String?
+  experienceYears    Int                @default(0)
+  startingPrice      Float              @default(0)
+  hourlyRate         Float?
+  skills             String?            @db.Text
+  certifications     String?            @db.Text
+  profileImage       String?
+  coverImage         String?
+  workingHours       String?
+  
+  // Nepal Location Hierarchy
+  province           String
+  district           String
+  city               String
+  municipality       String?
+  locality           String?
+  address            String?
+  latitude           Float?
+  longitude          Float?
+  
+  availability       Availability       @default(AVAILABLE_TODAY)
+  verificationStatus VerificationStatus @default(PENDING)
+  rating             Float              @default(0.0)
+  reviewCount        Int                @default(0)
+  isFeatured         Boolean            @default(false)
+  rejectionReason    String?            @db.Text
+  
+  createdAt          DateTime           @default(now())
+  updatedAt          DateTime           @updatedAt
+
+  services           Service[]
+  serviceRequests    ServiceRequest[]   @relation("TechnicianRequests")
+  reviews            Review[]           @relation("TechnicianReviews")
+  favorites          Favorite[]
+
+  @@index([categoryId])
+  @@index([verificationStatus])
+  @@index([province, district, city])
+  @@index([startingPrice])
+  @@index([rating])
+  @@index([availability])
+  @@index([isFeatured])
+}
+
+model Category {
+  id          String              @id @default(cuid())
+  name        String              @unique
+  slug        String              @unique
+  icon        String
+  description String?             @db.Text
+  isActive    Boolean             @default(true)
+  createdAt   DateTime            @default(now())
+  updatedAt   DateTime            @updatedAt
+
+  technicians TechnicianProfile[]
+
+  @@index([slug])
+  @@index([isActive])
+}
+
+model Service {
+  id                  String            @id @default(cuid())
+  technicianProfileId String
+  technicianProfile   TechnicianProfile @relation(fields: [technicianProfileId], references: [id], onDelete: Cascade)
+  title               String
+  description         String?           @db.Text
+  price               Float
+  createdAt           DateTime          @default(now())
+  updatedAt           DateTime          @updatedAt
+
+  @@index([technicianProfileId])
+}
+
+model LocationItem {
+  id        String         @id @default(cuid())
+  name      String
+  type      LocationType
+  parentId  String?
+  parent    LocationItem?  @relation("LocationHierarchy", fields: [parentId], references: [id], onDelete: Cascade)
+  children  LocationItem[] @relation("LocationHierarchy")
+  createdAt DateTime       @default(now())
+
+  @@index([parentId])
+  @@index([type])
+}
+
+model ServiceRequest {
+  id                  String            @id @default(cuid())
+  customerId          String
+  customer            User              @relation("CustomerRequests", fields: [customerId], references: [id], onDelete: Cascade)
+  technicianProfileId String
+  technicianProfile   TechnicianProfile @relation("TechnicianRequests", fields: [technicianProfileId], references: [id], onDelete: Cascade)
+  
+  serviceTitle        String
+  description         String            @db.Text
+  preferredDate       String
+  preferredTime       String
+  address             String
+  phone               String
+  imageUrl            String?
+  notes               String?           @db.Text
+  status              RequestStatus     @default(PENDING)
+  cancelReason        String?           @db.Text
+  
+  createdAt           DateTime          @default(now())
+  updatedAt           DateTime          @updatedAt
+
+  review              Review?
+
+  @@index([customerId])
+  @@index([technicianProfileId])
+  @@index([status])
+}
+
+model Review {
+  id                  String            @id @default(cuid())
+  customerId          String
+  customer            User              @relation("CustomerReviews", fields: [customerId], references: [id], onDelete: Cascade)
+  technicianProfileId String
+  technicianProfile   TechnicianProfile @relation("TechnicianReviews", fields: [technicianProfileId], references: [id], onDelete: Cascade)
+  serviceRequestId    String            @unique
+  serviceRequest      ServiceRequest    @relation(fields: [serviceRequestId], references: [id], onDelete: Cascade)
+  
+  rating              Int
+  comment             String            @db.Text
+  technicianReply     String?           @db.Text
+  createdAt           DateTime          @default(now())
+  updatedAt           DateTime          @updatedAt
+
+  @@index([technicianProfileId])
+  @@index([customerId])
+  @@index([rating])
+}
+
+model Favorite {
+  id                  String            @id @default(cuid())
+  customerId          String
+  customer            User              @relation("CustomerFavorites", fields: [customerId], references: [id], onDelete: Cascade)
+  technicianProfileId String
+  technicianProfile   TechnicianProfile @relation(fields: [technicianProfileId], references: [id], onDelete: Cascade)
+  createdAt           DateTime          @default(now())
+
+  @@unique([customerId, technicianProfileId])
+  @@index([customerId])
+  @@index([technicianProfileId])
+}
+
+model Notification {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title     String
+  message   String   @db.Text
+  link      String?
+  isRead    Boolean  @default(false)
+  type      String   @default("INFO")
+  createdAt DateTime @default(now())
+
+  @@index([userId, isRead])
+}
+
+model AdminLog {
+  id         String   @id @default(cuid())
+  adminId    String
+  admin      User     @relation(fields: [adminId], references: [id], onDelete: Cascade)
+  action     String
+  targetType String
+  targetId   String?
+  details    String?  @db.Text
+  createdAt  DateTime @default(now())
+
+  @@index([adminId])
+}
+
+model SiteSetting {
+  id          String   @id @default(cuid())
+  key         String   @unique
+  value       String   @db.Text
+  description String?
+  updatedAt   DateTime @updatedAt
+}
