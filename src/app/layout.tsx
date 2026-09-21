@@ -55,7 +55,7 @@ export default async function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-slate-50 text-slate-900 selection:bg-blue-100 selection:text-blue-900">
+      <body className="min-h-full flex flex-col bg-[#fafbfc] text-slate-900 selection:bg-blue-100 selection:text-blue-900">
         <Navbar
           initialSession={
             session

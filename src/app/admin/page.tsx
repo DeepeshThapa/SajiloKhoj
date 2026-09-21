@@ -26,6 +26,7 @@ import {
   MapPin,
   Calendar,
   Award,
+  ExternalLink,
 } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { Badge } from '@/components/ui/Badge';
@@ -210,28 +211,31 @@ export default function AdminDashboardPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-900 text-slate-100 py-8 sm:py-12">
+    <div className="min-h-screen bg-[#fafbfc] text-slate-800 py-8 sm:py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
-        {/* Admin Header */}
-        <div className="bg-slate-800/80 rounded-3xl p-6 sm:p-8 border border-slate-700/80 shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-6">
+        {/* Admin Header Banner */}
+        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-card flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="flex items-center gap-4">
-            <div className="w-14 h-14 rounded-2xl bg-purple-600/20 border border-purple-500/30 text-purple-400 flex items-center justify-center font-bold text-xl">
-              <Shield className="w-7 h-7" />
+            <div className="w-13 h-13 rounded-2xl bg-purple-50 border border-purple-200/70 text-purple-700 flex items-center justify-center font-bold text-xl shadow-xs shrink-0">
+              <Shield className="w-6 h-6" />
             </div>
             <div>
-              <span className="text-xs font-bold text-purple-400 uppercase tracking-wider">
+              <span className="text-[11px] font-bold text-purple-700 uppercase tracking-wider">
                 System Administration
               </span>
-              <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight mt-0.5">
+              <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mt-0.5">
                 Sajilo Khoj Control Center
               </h1>
+              <p className="text-xs text-slate-500 mt-0.5">
+                Supervise verified technician registrations, track booking metrics, and moderate marketplace content.
+              </p>
             </div>
           </div>
 
           <div className="flex items-center gap-3">
             <Link href="/" target="_blank">
-              <Button size="sm" variant="outline" className="bg-slate-800 text-white border-slate-600 hover:bg-slate-700">
-                <Eye className="w-4 h-4 mr-1" /> View Live Site
+              <Button size="sm" variant="outline">
+                <ExternalLink className="w-4 h-4 mr-1.5" /> View Live Site
               </Button>
             </Link>
           </div>
@@ -240,28 +244,40 @@ export default function AdminDashboardPage() {
         {/* Global Metric Cards */}
         {stats && (
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
-            <div className="bg-slate-800 p-5 rounded-2xl border border-slate-700">
-              <span className="text-xs font-bold uppercase text-slate-400">Total Users</span>
-              <p className="text-2xl sm:text-3xl font-black text-white mt-1">{stats.totalUsers}</p>
+            <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-card">
+              <div className="flex items-center justify-between text-slate-400 mb-2">
+                <span className="text-xs font-bold uppercase tracking-wider text-slate-500">Total Users</span>
+                <Users className="w-4 h-4 text-blue-600" />
+              </div>
+              <p className="text-2xl sm:text-3xl font-extrabold text-slate-900">{stats.totalUsers}</p>
             </div>
 
-            <div className="bg-slate-800 p-5 rounded-2xl border border-slate-700">
-              <span className="text-xs font-bold uppercase text-amber-400">Pending Approvals</span>
-              <p className="text-2xl sm:text-3xl font-black text-amber-400 mt-1">
+            <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-card">
+              <div className="flex items-center justify-between text-slate-400 mb-2">
+                <span className="text-xs font-bold uppercase tracking-wider text-amber-600">Pending Approvals</span>
+                <Clock className="w-4 h-4 text-amber-500" />
+              </div>
+              <p className="text-2xl sm:text-3xl font-extrabold text-amber-600">
                 {stats.pendingTechnicians}
               </p>
             </div>
 
-            <div className="bg-slate-800 p-5 rounded-2xl border border-slate-700">
-              <span className="text-xs font-bold uppercase text-teal-400">Approved Pros</span>
-              <p className="text-2xl sm:text-3xl font-black text-teal-400 mt-1">
+            <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-card">
+              <div className="flex items-center justify-between text-slate-400 mb-2">
+                <span className="text-xs font-bold uppercase tracking-wider text-teal-700">Approved Pros</span>
+                <Briefcase className="w-4 h-4 text-teal-600" />
+              </div>
+              <p className="text-2xl sm:text-3xl font-extrabold text-teal-800">
                 {stats.approvedTechnicians}
               </p>
             </div>
 
-            <div className="bg-slate-800 p-5 rounded-2xl border border-slate-700">
-              <span className="text-xs font-bold uppercase text-blue-400">Completed Jobs</span>
-              <p className="text-2xl sm:text-3xl font-black text-blue-400 mt-1">
+            <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-card">
+              <div className="flex items-center justify-between text-slate-400 mb-2">
+                <span className="text-xs font-bold uppercase tracking-wider text-blue-700">Completed Jobs</span>
+                <CheckCircle className="w-4 h-4 text-blue-600" />
+              </div>
+              <p className="text-2xl sm:text-3xl font-extrabold text-blue-700">
                 {stats.completedRequests}
               </p>
             </div>
@@ -269,7 +285,7 @@ export default function AdminDashboardPage() {
         )}
 
         {/* Admin Navigation Tabs */}
-        <div className="border-b border-slate-800 flex items-center gap-2 sm:gap-4 overflow-x-auto pb-1">
+        <div className="border-b border-slate-200 flex items-center gap-1.5 sm:gap-2 overflow-x-auto pb-1">
           {[
             { id: 'overview', label: 'Overview', icon: Activity },
             { id: 'technicians', label: `Technicians (${stats?.pendingTechnicians ? `⚡${stats.pendingTechnicians}` : technicians.length})`, icon: Briefcase },
@@ -286,10 +302,10 @@ export default function AdminDashboardPage() {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as any)}
-                className={`flex items-center gap-2 px-3 py-2.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-colors cursor-pointer ${
+                className={`flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all cursor-pointer ${
                   isActive
-                    ? 'bg-purple-600 text-white'
-                    : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                    ? 'bg-slate-900 text-white shadow-xs'
+                    : 'text-slate-600 hover:text-slate-900 hover:bg-white border border-transparent hover:border-slate-200/80'
                 }`}
               >
                 <Icon className="w-4 h-4" />
@@ -301,32 +317,32 @@ export default function AdminDashboardPage() {
 
         {/* 1. OVERVIEW TAB */}
         {activeTab === 'overview' && (
-          <div className="space-y-8">
+          <div className="space-y-8 animate-fade-in">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               {/* Pending Approvals Quick Box */}
-              <div className="bg-slate-800 p-6 sm:p-8 rounded-3xl border border-slate-700 space-y-4">
+              <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200/80 shadow-card space-y-4">
                 <div className="flex items-center justify-between">
-                  <h3 className="font-bold text-lg text-white flex items-center gap-2">
-                    <Clock className="w-5 h-5 text-amber-400" /> Pending Technician Applications
+                  <h3 className="font-bold text-base text-slate-900 flex items-center gap-2">
+                    <Clock className="w-5 h-5 text-amber-500" /> Pending Applications
                   </h3>
                   <Badge variant="warning">{stats?.pendingTechnicians || 0} Pending</Badge>
                 </div>
 
-                <div className="divide-y divide-slate-700">
+                <div className="divide-y divide-slate-100">
                   {technicians
                     .filter((t) => t.verificationStatus === 'PENDING')
                     .slice(0, 4)
                     .map((tech) => (
-                      <div key={tech.id} className="py-3 flex items-center justify-between gap-4">
+                      <div key={tech.id} className="py-3.5 flex items-center justify-between gap-4">
                         <div>
-                          <p className="font-bold text-sm text-white">{tech.user.name}</p>
-                          <p className="text-xs text-slate-400">{tech.category?.name} • {tech.city}</p>
+                          <p className="font-bold text-sm text-slate-900">{tech.user.name}</p>
+                          <p className="text-xs text-slate-500">{tech.category?.name} • {tech.city}</p>
                         </div>
                         <div className="flex items-center gap-2">
                           <Button
                             size="sm"
                             variant="outline"
-                            className="text-xs bg-slate-700 text-white border-slate-600"
+                            className="text-xs"
                             onClick={() => setSelectedTech(tech)}
                           >
                             Inspect
@@ -342,7 +358,7 @@ export default function AdminDashboardPage() {
                       </div>
                     ))}
                   {technicians.filter((t) => t.verificationStatus === 'PENDING').length === 0 && (
-                    <p className="text-xs text-slate-400 py-6 text-center">
+                    <p className="text-xs text-slate-500 py-8 text-center">
                       All technician applications have been reviewed! ✅
                     </p>
                   )}
@@ -350,25 +366,25 @@ export default function AdminDashboardPage() {
               </div>
 
               {/* Recent Platform Activity */}
-              <div className="bg-slate-800 p-6 sm:p-8 rounded-3xl border border-slate-700 space-y-4">
-                <h3 className="font-bold text-lg text-white flex items-center gap-2">
-                  <Activity className="w-5 h-5 text-purple-400" /> Recent System Audit Logs
+              <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200/80 shadow-card space-y-4">
+                <h3 className="font-bold text-base text-slate-900 flex items-center gap-2">
+                  <Activity className="w-5 h-5 text-purple-600" /> System Activity Logs
                 </h3>
 
-                <div className="divide-y divide-slate-700 max-h-80 overflow-y-auto">
+                <div className="divide-y divide-slate-100 max-h-80 overflow-y-auto pr-1">
                   {logs.slice(0, 6).map((l) => (
                     <div key={l.id} className="py-2.5 space-y-0.5">
                       <div className="flex items-center justify-between text-xs">
-                        <span className="font-bold text-purple-300">{l.action}</span>
+                        <span className="font-bold text-purple-800">{l.action}</span>
                         <span className="text-[10px] text-slate-400">
                           {new Date(l.createdAt).toLocaleTimeString()}
                         </span>
                       </div>
-                      <p className="text-xs text-slate-300">{l.details}</p>
+                      <p className="text-xs text-slate-600">{l.details}</p>
                     </div>
                   ))}
                   {logs.length === 0 && (
-                    <p className="text-xs text-slate-400 py-6 text-center">No logs recorded yet.</p>
+                    <p className="text-xs text-slate-400 py-8 text-center">No logs recorded yet.</p>
                   )}
                 </div>
               </div>
@@ -378,11 +394,11 @@ export default function AdminDashboardPage() {
 
         {/* 2. TECHNICIANS & APPROVALS TAB */}
         {activeTab === 'technicians' && (
-          <div className="bg-slate-800 p-6 sm:p-8 rounded-3xl border border-slate-700 space-y-6">
+          <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200/80 shadow-card space-y-6 animate-fade-in">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div>
-                <h2 className="text-xl font-bold text-white">Technician Verification & Management</h2>
-                <p className="text-xs text-slate-400">
+                <h2 className="text-lg font-bold text-slate-900">Technician Verification & Management</h2>
+                <p className="text-xs text-slate-500">
                   Approve, reject, suspend or feature technicians across Nepal.
                 </p>
               </div>
@@ -392,10 +408,10 @@ export default function AdminDashboardPage() {
                   <button
                     key={st}
                     onClick={() => setTechFilter(st)}
-                    className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-colors cursor-pointer ${
+                    className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                       techFilter === st
-                        ? 'bg-purple-600 text-white'
-                        : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
+                        ? 'bg-blue-600 text-white shadow-xs'
+                        : 'bg-slate-50 border border-slate-200/80 text-slate-600 hover:bg-slate-100'
                     }`}
                   >
                     {st}
@@ -405,9 +421,9 @@ export default function AdminDashboardPage() {
             </div>
 
             {/* Technicians Table */}
-            <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs text-slate-300">
-                <thead className="bg-slate-900/60 text-slate-400 uppercase font-semibold text-[10px] tracking-wider">
+            <div className="overflow-x-auto rounded-2xl border border-slate-200/70">
+              <table className="w-full text-left text-xs text-slate-700">
+                <thead className="bg-slate-50 text-slate-500 uppercase font-semibold text-[10px] tracking-wider border-b border-slate-200/70">
                   <tr>
                     <th className="p-3.5">Technician</th>
                     <th className="p-3.5">Trade & City</th>
@@ -418,11 +434,11 @@ export default function AdminDashboardPage() {
                     <th className="p-3.5 text-right">Actions</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-700">
+                <tbody className="divide-y divide-slate-100 bg-white">
                   {technicians.map((t) => (
-                    <tr key={t.id} className="hover:bg-slate-700/40 transition-colors">
-                      <td className="p-3.5 font-bold text-white flex items-center gap-2.5">
-                        <div className="w-8 h-8 rounded-lg bg-slate-700 overflow-hidden relative">
+                    <tr key={t.id} className="hover:bg-slate-50/60 transition-colors">
+                      <td className="p-3.5 font-bold text-slate-900 flex items-center gap-2.5">
+                        <div className="w-8 h-8 rounded-lg bg-slate-100 overflow-hidden relative shrink-0">
                           <Image
                             src={
                               t.profileImage ||
@@ -442,11 +458,11 @@ export default function AdminDashboardPage() {
                         </div>
                       </td>
                       <td className="p-3.5">
-                        <span className="text-purple-300 font-semibold">{t.category?.name}</span>
+                        <span className="text-teal-800 font-semibold">{t.category?.name}</span>
                         <span className="block text-[10px] text-slate-400">{t.city}</span>
                       </td>
-                      <td className="p-3.5">{t.experienceYears} yrs</td>
-                      <td className="p-3.5 font-bold text-white">Rs. {t.startingPrice}</td>
+                      <td className="p-3.5 font-medium">{t.experienceYears} yrs</td>
+                      <td className="p-3.5 font-bold text-slate-900">Rs. {t.startingPrice}</td>
                       <td className="p-3.5">
                         <Badge
                           variant={
@@ -464,8 +480,8 @@ export default function AdminDashboardPage() {
                       <td className="p-3.5">
                         <button
                           onClick={() => handleToggleFeatured(t.id, t.isFeatured)}
-                          className={`p-1 rounded cursor-pointer ${
-                            t.isFeatured ? 'text-amber-400' : 'text-slate-600 hover:text-slate-400'
+                          className={`p-1.5 rounded-lg hover:bg-slate-100 transition-colors cursor-pointer ${
+                            t.isFeatured ? 'text-amber-500' : 'text-slate-300 hover:text-slate-500'
                           }`}
                           title="Toggle homepage featured"
                         >
@@ -476,7 +492,7 @@ export default function AdminDashboardPage() {
                         <Button
                           size="sm"
                           variant="outline"
-                          className="bg-slate-700 text-white border-slate-600 text-[11px]"
+                          className="text-[11px]"
                           onClick={() => setSelectedTech(t)}
                         >
                           Details
@@ -522,11 +538,11 @@ export default function AdminDashboardPage() {
 
         {/* 3. USERS MANAGEMENT TAB */}
         {activeTab === 'users' && (
-          <div className="bg-slate-800 p-6 sm:p-8 rounded-3xl border border-slate-700 space-y-6">
+          <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200/80 shadow-card space-y-6 animate-fade-in">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div>
-                <h2 className="text-xl font-bold text-white">Platform Users Directory</h2>
-                <p className="text-xs text-slate-400">View and manage customer and technician accounts.</p>
+                <h2 className="text-lg font-bold text-slate-900">Platform Users Directory</h2>
+                <p className="text-xs text-slate-500">View and manage customer and technician accounts.</p>
               </div>
 
               <div className="flex items-center gap-2">
@@ -534,10 +550,10 @@ export default function AdminDashboardPage() {
                   <button
                     key={r}
                     onClick={() => setUserRoleFilter(r)}
-                    className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-colors cursor-pointer ${
+                    className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                       userRoleFilter === r
-                        ? 'bg-purple-600 text-white'
-                        : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
+                        ? 'bg-blue-600 text-white shadow-xs'
+                        : 'bg-slate-50 border border-slate-200/80 text-slate-600 hover:bg-slate-100'
                     }`}
                   >
                     {r}
@@ -546,9 +562,9 @@ export default function AdminDashboardPage() {
               </div>
             </div>
 
-            <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs text-slate-300">
-                <thead className="bg-slate-900/60 text-slate-400 uppercase font-semibold text-[10px] tracking-wider">
+            <div className="overflow-x-auto rounded-2xl border border-slate-200/70">
+              <table className="w-full text-left text-xs text-slate-700">
+                <thead className="bg-slate-50 text-slate-500 uppercase font-semibold text-[10px] tracking-wider border-b border-slate-200/70">
                   <tr>
                     <th className="p-3.5">Name</th>
                     <th className="p-3.5">Email</th>
@@ -558,12 +574,12 @@ export default function AdminDashboardPage() {
                     <th className="p-3.5 text-right">Actions</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-700">
+                <tbody className="divide-y divide-slate-100 bg-white">
                   {users.map((u) => (
-                    <tr key={u.id} className="hover:bg-slate-700/40 transition-colors">
-                      <td className="p-3.5 font-bold text-white">{u.name}</td>
-                      <td className="p-3.5">{u.email}</td>
-                      <td className="p-3.5">{u.phone || '—'}</td>
+                    <tr key={u.id} className="hover:bg-slate-50/60 transition-colors">
+                      <td className="p-3.5 font-bold text-slate-900">{u.name}</td>
+                      <td className="p-3.5 text-slate-600">{u.email}</td>
+                      <td className="p-3.5 text-slate-600">{u.phone || '—'}</td>
                       <td className="p-3.5">
                         <Badge
                           variant={
@@ -588,7 +604,7 @@ export default function AdminDashboardPage() {
                           <Button
                             size="sm"
                             variant="outline"
-                            className="bg-slate-700 text-slate-300 border-slate-600 text-xs"
+                            className="text-xs"
                             onClick={() => handleUpdateUserStatus(u.id, 'SUSPENDED')}
                           >
                             Suspend
@@ -622,11 +638,11 @@ export default function AdminDashboardPage() {
 
         {/* 4. CATEGORIES TAB */}
         {activeTab === 'categories' && (
-          <div className="bg-slate-800 p-6 sm:p-8 rounded-3xl border border-slate-700 space-y-6">
+          <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200/80 shadow-card space-y-6 animate-fade-in">
             <div className="flex items-center justify-between">
               <div>
-                <h2 className="text-xl font-bold text-white">Trade Categories</h2>
-                <p className="text-xs text-slate-400">Manage all services displayed across the platform.</p>
+                <h2 className="text-lg font-bold text-slate-900">Trade Categories</h2>
+                <p className="text-xs text-slate-500">Manage all services displayed across the platform.</p>
               </div>
               <Button size="sm" variant="primary" onClick={() => setIsNewCatModalOpen(true)}>
                 <Plus className="w-4 h-4 mr-1" /> Add Category
@@ -637,20 +653,20 @@ export default function AdminDashboardPage() {
               {categories.map((c) => (
                 <div
                   key={c.id}
-                  className="bg-slate-900/80 p-5 rounded-2xl border border-slate-700 space-y-3 flex flex-col justify-between"
+                  className="bg-slate-50/70 p-5 rounded-2xl border border-slate-200/80 space-y-3 flex flex-col justify-between"
                 >
                   <div>
                     <div className="flex items-center justify-between">
-                      <h3 className="font-bold text-base text-white">{c.name}</h3>
+                      <h3 className="font-bold text-base text-slate-900">{c.name}</h3>
                       <Badge variant="primary" size="sm">
                         {c._count?.technicians || 0} Pros
                       </Badge>
                     </div>
-                    <span className="text-xs text-slate-400 font-mono">/{c.slug}</span>
-                    <p className="text-xs text-slate-400 mt-2 line-clamp-2">{c.description}</p>
+                    <span className="text-xs text-blue-600 font-mono">/{c.slug}</span>
+                    <p className="text-xs text-slate-500 mt-2 line-clamp-2">{c.description}</p>
                   </div>
 
-                  <div className="pt-3 border-t border-slate-800 flex justify-end">
+                  <div className="pt-3 border-t border-slate-200/60 flex justify-end">
                     <Button
                       size="sm"
                       variant="danger"
@@ -668,11 +684,11 @@ export default function AdminDashboardPage() {
 
         {/* 5. BOOKINGS SUPERVISION TAB */}
         {activeTab === 'requests' && (
-          <div className="bg-slate-800 p-6 sm:p-8 rounded-3xl border border-slate-700 space-y-6">
-            <h2 className="text-xl font-bold text-white">All Platform Service Bookings</h2>
-            <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs text-slate-300">
-                <thead className="bg-slate-900/60 text-slate-400 uppercase font-semibold text-[10px]">
+          <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200/80 shadow-card space-y-6 animate-fade-in">
+            <h2 className="text-lg font-bold text-slate-900">All Platform Service Bookings</h2>
+            <div className="overflow-x-auto rounded-2xl border border-slate-200/70">
+              <table className="w-full text-left text-xs text-slate-700">
+                <thead className="bg-slate-50 text-slate-500 uppercase font-semibold text-[10px] tracking-wider border-b border-slate-200/70">
                   <tr>
                     <th className="p-3.5">Customer</th>
                     <th className="p-3.5">Technician</th>
@@ -681,15 +697,15 @@ export default function AdminDashboardPage() {
                     <th className="p-3.5">Status</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-700">
+                <tbody className="divide-y divide-slate-100 bg-white">
                   {requests.map((r) => (
-                    <tr key={r.id}>
-                      <td className="p-3.5 font-semibold text-white">{r.customer?.name}</td>
-                      <td className="p-3.5 font-semibold text-teal-300">
+                    <tr key={r.id} className="hover:bg-slate-50/60 transition-colors">
+                      <td className="p-3.5 font-bold text-slate-900">{r.customer?.name}</td>
+                      <td className="p-3.5 font-semibold text-teal-800">
                         {r.technicianProfile?.user?.name}
                       </td>
-                      <td className="p-3.5">{r.serviceTitle}</td>
-                      <td className="p-3.5">{r.preferredDate} ({r.preferredTime})</td>
+                      <td className="p-3.5 text-slate-600">{r.serviceTitle}</td>
+                      <td className="p-3.5 text-slate-500">{r.preferredDate} ({r.preferredTime})</td>
                       <td className="p-3.5">
                         <Badge
                           variant={
@@ -714,24 +730,24 @@ export default function AdminDashboardPage() {
 
         {/* 6. REVIEWS MODERATION TAB */}
         {activeTab === 'reviews' && (
-          <div className="bg-slate-800 p-6 sm:p-8 rounded-3xl border border-slate-700 space-y-6">
-            <h2 className="text-xl font-bold text-white">Reviews Moderation</h2>
-            <div className="divide-y divide-slate-700">
+          <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200/80 shadow-card space-y-6 animate-fade-in">
+            <h2 className="text-lg font-bold text-slate-900">Reviews Moderation</h2>
+            <div className="divide-y divide-slate-100">
               {reviews.map((rev) => (
-                <div key={rev.id} className="py-4 flex items-start justify-between gap-4">
+                <div key={rev.id} className="py-4 first:pt-0 flex items-start justify-between gap-4">
                   <div className="space-y-1">
                     <div className="flex items-center gap-2">
-                      <span className="font-bold text-sm text-white">{rev.customer?.name}</span>
+                      <span className="font-bold text-sm text-slate-900">{rev.customer?.name}</span>
                       <span className="text-xs text-slate-400">reviewed</span>
-                      <span className="font-bold text-sm text-teal-300">
+                      <span className="font-bold text-sm text-teal-800">
                         {rev.technicianProfile?.user?.name}
                       </span>
                       <span className="text-amber-400 text-xs">{'★'.repeat(rev.rating)}</span>
                     </div>
-                    <p className="text-xs text-slate-300 leading-relaxed italic">
+                    <p className="text-xs text-slate-600 leading-relaxed italic">
                       &ldquo;{rev.comment}&rdquo;
                     </p>
-                    <span className="text-[10px] text-slate-500 block">
+                    <span className="text-[10px] text-slate-400 block">
                       {new Date(rev.createdAt).toLocaleString()}
                     </span>
                   </div>
@@ -752,21 +768,21 @@ export default function AdminDashboardPage() {
 
         {/* 7. AUDIT LOGS TAB */}
         {activeTab === 'logs' && (
-          <div className="bg-slate-800 p-6 sm:p-8 rounded-3xl border border-slate-700 space-y-6">
-            <h2 className="text-xl font-bold text-white">Full System Audit Trail</h2>
-            <div className="divide-y divide-slate-700 max-h-[600px] overflow-y-auto">
+          <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200/80 shadow-card space-y-6 animate-fade-in">
+            <h2 className="text-lg font-bold text-slate-900">Full System Audit Trail</h2>
+            <div className="divide-y divide-slate-100 max-h-[600px] overflow-y-auto pr-1">
               {logs.map((l) => (
                 <div key={l.id} className="py-3 flex items-start justify-between gap-4">
                   <div>
                     <div className="flex items-center gap-2">
-                      <span className="font-bold text-xs text-purple-400">{l.action}</span>
+                      <span className="font-bold text-xs text-purple-700">{l.action}</span>
                       <span className="text-[10px] text-slate-400">
                         by {l.admin?.name || 'Admin'}
                       </span>
                     </div>
-                    <p className="text-xs text-slate-300 mt-1">{l.details}</p>
+                    <p className="text-xs text-slate-600 mt-0.5">{l.details}</p>
                   </div>
-                  <span className="text-[10px] text-slate-500 whitespace-nowrap">
+                  <span className="text-[10px] text-slate-400 whitespace-nowrap">
                     {new Date(l.createdAt).toLocaleString()}
                   </span>
                 </div>
@@ -777,52 +793,52 @@ export default function AdminDashboardPage() {
 
         {/* 8. SETTINGS TAB */}
         {activeTab === 'settings' && (
-          <div className="bg-slate-800 p-6 sm:p-8 rounded-3xl border border-slate-700 space-y-6 max-w-2xl">
-            <h2 className="text-xl font-bold text-white">Platform Settings</h2>
+          <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200/80 shadow-card space-y-6 max-w-2xl animate-fade-in">
+            <h2 className="text-lg font-bold text-slate-900">Platform Settings</h2>
 
             <div className="space-y-4">
-              <div className="flex items-center justify-between p-4 bg-slate-900 rounded-2xl border border-slate-700">
+              <div className="flex items-center justify-between p-4 bg-slate-50/80 rounded-2xl border border-slate-200/80">
                 <div>
-                  <h4 className="font-bold text-sm text-white">Require Admin Verification</h4>
-                  <p className="text-xs text-slate-400">
+                  <h4 className="font-bold text-sm text-slate-900">Require Admin Verification</h4>
+                  <p className="text-xs text-slate-500">
                     Technicians must be manually approved before appearing in public searches.
                   </p>
                 </div>
                 <button
                   onClick={handleToggleRequireApproval}
                   className={`w-12 h-6 flex items-center rounded-full p-1 cursor-pointer transition-colors ${
-                    siteSettings['require_approval'] === 'true' ? 'bg-purple-600' : 'bg-slate-700'
+                    siteSettings['require_approval'] === 'true' ? 'bg-blue-600' : 'bg-slate-300'
                   }`}
                 >
                   <div
-                    className={`bg-white w-4 h-4 rounded-full shadow-md transform transition-transform ${
+                    className={`bg-white w-4 h-4 rounded-full shadow-xs transform transition-transform ${
                       siteSettings['require_approval'] === 'true' ? 'translate-x-6' : ''
                     }`}
                   />
                 </button>
               </div>
 
-              <div className="p-4 bg-slate-900 rounded-2xl border border-slate-700 space-y-2">
-                <h4 className="font-bold text-sm text-white">Customer Support Helpline</h4>
+              <div className="p-4 bg-slate-50/80 rounded-2xl border border-slate-200/80 space-y-2">
+                <h4 className="font-bold text-sm text-slate-900">Customer Support Helpline</h4>
                 <input
                   type="text"
                   value={siteSettings['support_phone'] || '+977-1-4567890'}
                   onChange={(e) =>
                     setSiteSettings((prev) => ({ ...prev, support_phone: e.target.value }))
                   }
-                  className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white"
+                  className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>
 
-              <div className="p-4 bg-slate-900 rounded-2xl border border-slate-700 space-y-2">
-                <h4 className="font-bold text-sm text-white">Support Email</h4>
+              <div className="p-4 bg-slate-50/80 rounded-2xl border border-slate-200/80 space-y-2">
+                <h4 className="font-bold text-sm text-slate-900">Support Email</h4>
                 <input
                   type="email"
                   value={siteSettings['support_email'] || 'support@sajilokhoj.com'}
                   onChange={(e) =>
                     setSiteSettings((prev) => ({ ...prev, support_email: e.target.value }))
                   }
-                  className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white"
+                  className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>
             </div>
@@ -840,7 +856,7 @@ export default function AdminDashboardPage() {
         >
           <div className="space-y-4 text-xs text-slate-700">
             <div className="flex items-center gap-4 pb-4 border-b border-slate-100">
-              <div className="w-16 h-16 rounded-2xl bg-slate-100 relative overflow-hidden">
+              <div className="w-16 h-16 rounded-2xl bg-slate-100 relative overflow-hidden shrink-0 border border-slate-200/60">
                 <Image
                   src={
                     selectedTech.profileImage ||
@@ -869,37 +885,39 @@ export default function AdminDashboardPage() {
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-3 bg-slate-50 p-4 rounded-xl">
+            <div className="grid grid-cols-2 gap-3 bg-slate-50 p-4 rounded-xl border border-slate-100">
               <div>
-                <span className="text-slate-400 font-semibold block">EMAIL:</span>
+                <span className="text-slate-400 font-semibold block text-[10px]">EMAIL:</span>
                 <span className="font-bold text-slate-900">{selectedTech.user?.email}</span>
               </div>
               <div>
-                <span className="text-slate-400 font-semibold block">PHONE:</span>
+                <span className="text-slate-400 font-semibold block text-[10px]">PHONE:</span>
                 <span className="font-bold text-slate-900">{selectedTech.user?.phone || '—'}</span>
               </div>
               <div>
-                <span className="text-slate-400 font-semibold block">LOCATION:</span>
+                <span className="text-slate-400 font-semibold block text-[10px]">LOCATION:</span>
                 <span className="font-bold text-slate-900">
                   {selectedTech.locality ? `${selectedTech.locality}, ` : ''}
                   {selectedTech.city}, {selectedTech.district}
                 </span>
               </div>
               <div>
-                <span className="text-slate-400 font-semibold block">EXPERIENCE:</span>
+                <span className="text-slate-400 font-semibold block text-[10px]">EXPERIENCE:</span>
                 <span className="font-bold text-slate-900">{selectedTech.experienceYears} Years</span>
               </div>
             </div>
 
             <div>
-              <span className="text-slate-400 font-semibold block mb-1">BIOGRAPHY:</span>
-              <p className="p-3 bg-slate-50 rounded-xl leading-relaxed">{selectedTech.bio}</p>
+              <span className="text-slate-400 font-semibold block mb-1 text-[10px]">BIOGRAPHY:</span>
+              <p className="p-3 bg-slate-50 rounded-xl leading-relaxed border border-slate-100 text-slate-700">
+                {selectedTech.bio}
+              </p>
             </div>
 
             {selectedTech.certifications && (
               <div>
-                <span className="text-slate-400 font-semibold block mb-1">CERTIFICATIONS:</span>
-                <p className="p-3 bg-teal-50 text-teal-900 rounded-xl font-semibold">
+                <span className="text-slate-400 font-semibold block mb-1 text-[10px]">CERTIFICATIONS:</span>
+                <p className="p-3 bg-teal-50/80 text-teal-900 rounded-xl font-semibold border border-teal-200/60">
                   {selectedTech.certifications}
                 </p>
               </div>
@@ -946,7 +964,7 @@ export default function AdminDashboardPage() {
                 value={newCatName}
                 onChange={(e) => setNewCatName(e.target.value)}
                 placeholder="e.g. Masonry & Bricklaying"
-                className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm"
+                className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
 
@@ -957,7 +975,7 @@ export default function AdminDashboardPage() {
                 value={newCatSlug}
                 onChange={(e) => setNewCatSlug(e.target.value)}
                 placeholder="masonry (optional)"
-                className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm"
+                className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
 
@@ -968,7 +986,7 @@ export default function AdminDashboardPage() {
                 value={newCatDesc}
                 onChange={(e) => setNewCatDesc(e.target.value)}
                 placeholder="Description for customers..."
-                className="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm"
+                className="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
 

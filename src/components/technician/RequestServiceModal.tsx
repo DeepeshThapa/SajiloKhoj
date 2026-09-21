@@ -144,7 +144,7 @@ export function RequestServiceModal({
           )}
 
           {/* Technician mini banner */}
-          <div className="p-3.5 rounded-xl bg-blue-50/60 border border-blue-100 flex items-center justify-between text-xs">
+          <div className="p-3.5 rounded-2xl bg-slate-50/80 border border-slate-200/70 flex items-center justify-between text-xs">
             <div>
               <span className="font-bold text-slate-900 block">{technician.user.name}</span>
               <span className="text-slate-500 font-medium">
@@ -152,14 +152,14 @@ export function RequestServiceModal({
               </span>
             </div>
             <div className="text-right">
-              <span className="text-[10px] text-slate-400 font-semibold block">EST. STARTING RATE</span>
-              <span className="font-extrabold text-blue-700">Rs. {technician.startingPrice}</span>
+              <span className="text-[10px] text-slate-400 font-bold tracking-wider block uppercase">Est. Starting Rate</span>
+              <span className="font-bold text-blue-600 text-sm">Rs. {technician.startingPrice}</span>
             </div>
           </div>
 
           {/* Service Title */}
           <div>
-            <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5">
+            <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-1.5">
               Service Requested *
             </label>
             {technician.services && technician.services.length > 0 ? (
@@ -167,7 +167,7 @@ export function RequestServiceModal({
                 <select
                   value={serviceTitle}
                   onChange={(e) => setServiceTitle(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200/90 bg-slate-50/60 text-slate-900 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:bg-white"
                 >
                   {technician.services.map((s) => (
                     <option key={s.id} value={s.title}>
@@ -188,7 +188,7 @@ export function RequestServiceModal({
                   value={serviceTitle}
                   onChange={(e) => setServiceTitle(e.target.value)}
                   placeholder="e.g. Bathroom pipe leakage, switchboard installation"
-                  className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white"
+                  className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200/90 bg-slate-50/60 text-slate-900 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:bg-white"
                 />
               </div>
             )}
@@ -196,7 +196,7 @@ export function RequestServiceModal({
 
           {/* Description */}
           <div>
-            <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5">
+            <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-1.5">
               Problem Description & Details *
             </label>
             <div className="relative">
@@ -206,7 +206,7 @@ export function RequestServiceModal({
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 placeholder="Explain the problem in detail (e.g. continuous leaking pipe under kitchen sink, circuit breaker tripped twice today)..."
-                className="w-full p-3 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white"
+                className="w-full p-3 rounded-xl border border-slate-200/90 bg-slate-50/60 text-slate-900 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:bg-white"
               />
             </div>
           </div>
@@ -214,7 +214,7 @@ export function RequestServiceModal({
           {/* Date & Time Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5">
+              <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-1.5">
                 Preferred Date *
               </label>
               <div className="relative">
@@ -224,19 +224,19 @@ export function RequestServiceModal({
                   min={new Date().toISOString().split('T')[0]}
                   value={preferredDate}
                   onChange={(e) => setPreferredDate(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200/90 bg-slate-50/60 text-slate-900 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:bg-white"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5">
+              <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-1.5">
                 Time Slot *
               </label>
               <select
                 value={preferredTime}
                 onChange={(e) => setPreferredTime(e.target.value)}
-                className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white"
+                className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200/90 bg-slate-50/60 text-slate-900 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:bg-white"
               >
                 {timeSlots.map((slot) => (
                   <option key={slot} value={slot}>
@@ -250,35 +250,35 @@ export function RequestServiceModal({
           {/* Address & Phone */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5">
+              <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-1.5">
                 Full Address / Locality *
               </label>
               <div className="relative">
-                <MapPin className="w-4 h-4 absolute left-3 top-3 text-slate-400" />
+                <MapPin className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
                 <input
                   type="text"
                   required
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
                   placeholder="e.g. New Baneshwor, House #14, Kathmandu"
-                  className="w-full pl-9 pr-3 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white"
+                  className="w-full pl-10 pr-3 py-2.5 rounded-xl border border-slate-200/90 bg-slate-50/60 text-slate-900 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:bg-white"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5">
+              <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-1.5">
                 Contact Phone *
               </label>
               <div className="relative">
-                <Phone className="w-4 h-4 absolute left-3 top-3 text-slate-400" />
+                <Phone className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
                 <input
                   type="tel"
                   required
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                   placeholder="+977 98XXXXXXXX"
-                  className="w-full pl-9 pr-3 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white"
+                  className="w-full pl-10 pr-3 py-2.5 rounded-xl border border-slate-200/90 bg-slate-50/60 text-slate-900 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:bg-white"
                 />
               </div>
             </div>
@@ -286,7 +286,7 @@ export function RequestServiceModal({
 
           {/* Additional Notes */}
           <div>
-            <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5">
+            <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-1.5">
               Special Instructions / Landmark (Optional)
             </label>
             <input
@@ -294,15 +294,15 @@ export function RequestServiceModal({
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
               placeholder="e.g. Beside Civil Bank ATM, please bring spare 1-inch PPR valve"
-              className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white"
+              className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200/90 bg-slate-50/60 text-slate-900 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:bg-white"
             />
           </div>
 
-          <div className="pt-3 flex items-center justify-end gap-3 border-t border-slate-100">
-            <Button type="button" variant="outline" onClick={onClose} disabled={isLoading}>
+          <div className="pt-3 flex items-center justify-end gap-2.5 border-t border-slate-100">
+            <Button type="button" variant="outline" size="sm" onClick={onClose} disabled={isLoading}>
               Cancel
             </Button>
-            <Button type="submit" variant="primary" isLoading={isLoading}>
+            <Button type="submit" variant="primary" size="sm" isLoading={isLoading}>
               Confirm & Dispatch Request
             </Button>
           </div>

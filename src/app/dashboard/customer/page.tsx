@@ -107,15 +107,15 @@ export default function CustomerDashboardPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 py-8 sm:py-12">
+    <div className="min-h-screen bg-[#fafbfc] py-8 sm:py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         {/* Header Banner */}
-        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-6">
+        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-card flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div>
-            <span className="text-xs font-bold text-blue-600 uppercase tracking-wider">
+            <span className="text-[11px] font-bold text-blue-600 uppercase tracking-wider">
               Customer Portal
             </span>
-            <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight mt-1">
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mt-0.5">
               My Dashboard & Bookings
             </h1>
             <p className="text-xs sm:text-sm text-slate-500 mt-1">
@@ -132,67 +132,67 @@ export default function CustomerDashboardPage() {
 
         {/* Stats Grid */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-          <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs">
+          <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-card">
             <div className="flex items-center justify-between text-slate-400 mb-2">
-              <span className="text-xs font-bold uppercase tracking-wider">Active Bookings</span>
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-500">Active Bookings</span>
               <Clock className="w-4 h-4 text-blue-600" />
             </div>
-            <p className="text-2xl font-black text-slate-900">{activeCount}</p>
+            <p className="text-2xl font-extrabold text-slate-900">{activeCount}</p>
           </div>
 
-          <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs">
+          <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-card">
             <div className="flex items-center justify-between text-slate-400 mb-2">
-              <span className="text-xs font-bold uppercase tracking-wider">Completed Jobs</span>
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-500">Completed Jobs</span>
               <CheckCircle className="w-4 h-4 text-emerald-600" />
             </div>
-            <p className="text-2xl font-black text-slate-900">{completedCount}</p>
+            <p className="text-2xl font-extrabold text-slate-900">{completedCount}</p>
           </div>
 
-          <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs">
+          <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-card">
             <div className="flex items-center justify-between text-slate-400 mb-2">
-              <span className="text-xs font-bold uppercase tracking-wider">Saved Pros</span>
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-500">Saved Pros</span>
               <Heart className="w-4 h-4 text-rose-500" />
             </div>
-            <p className="text-2xl font-black text-slate-900">{favorites.length}</p>
+            <p className="text-2xl font-extrabold text-slate-900">{favorites.length}</p>
           </div>
 
-          <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs">
+          <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-card">
             <div className="flex items-center justify-between text-slate-400 mb-2">
-              <span className="text-xs font-bold uppercase tracking-wider">Notifications</span>
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-500">Notifications</span>
               <Bell className="w-4 h-4 text-amber-500" />
             </div>
-            <p className="text-2xl font-black text-slate-900">{notifications.length}</p>
+            <p className="text-2xl font-extrabold text-slate-900">{notifications.length}</p>
           </div>
         </div>
 
         {/* Navigation Tabs */}
-        <div className="border-b border-slate-200 flex items-center gap-4">
+        <div className="border-b border-slate-200 flex items-center gap-2 sm:gap-4 overflow-x-auto pb-1">
           <button
             onClick={() => setActiveTab('requests')}
-            className={`pb-3 text-sm font-bold border-b-2 transition-all cursor-pointer ${
+            className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all cursor-pointer ${
               activeTab === 'requests'
-                ? 'border-blue-600 text-blue-600'
-                : 'border-transparent text-slate-500 hover:text-slate-900'
+                ? 'bg-blue-600 text-white shadow-xs'
+                : 'text-slate-600 hover:text-slate-900 hover:bg-white border border-transparent hover:border-slate-200/80'
             }`}
           >
             My Service Requests ({requests.length})
           </button>
           <button
             onClick={() => setActiveTab('favorites')}
-            className={`pb-3 text-sm font-bold border-b-2 transition-all cursor-pointer ${
+            className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all cursor-pointer ${
               activeTab === 'favorites'
-                ? 'border-blue-600 text-blue-600'
-                : 'border-transparent text-slate-500 hover:text-slate-900'
+                ? 'bg-blue-600 text-white shadow-xs'
+                : 'text-slate-600 hover:text-slate-900 hover:bg-white border border-transparent hover:border-slate-200/80'
             }`}
           >
             Saved Technicians ({favorites.length})
           </button>
           <button
             onClick={() => setActiveTab('notifications')}
-            className={`pb-3 text-sm font-bold border-b-2 transition-all cursor-pointer ${
+            className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all cursor-pointer ${
               activeTab === 'notifications'
-                ? 'border-blue-600 text-blue-600'
-                : 'border-transparent text-slate-500 hover:text-slate-900'
+                ? 'bg-blue-600 text-white shadow-xs'
+                : 'text-slate-600 hover:text-slate-900 hover:bg-white border border-transparent hover:border-slate-200/80'
             }`}
           >
             Notifications ({notifications.length})
@@ -201,17 +201,17 @@ export default function CustomerDashboardPage() {
 
         {/* Tab 1: Service Requests */}
         {activeTab === 'requests' && (
-          <div className="space-y-6">
+          <div className="space-y-6 animate-fade-in">
             {/* Status Filter Pills */}
             <div className="flex items-center gap-2 overflow-x-auto pb-2">
               {['ALL', 'PENDING', 'ACCEPTED', 'IN_PROGRESS', 'COMPLETED', 'CANCELLED'].map((st) => (
                 <button
                   key={st}
                   onClick={() => setStatusFilter(st)}
-                  className={`px-3 py-1.5 rounded-xl text-xs font-bold uppercase tracking-wider whitespace-nowrap transition-colors cursor-pointer ${
+                  className={`px-3 py-1.5 rounded-xl text-xs font-bold uppercase tracking-wider whitespace-nowrap transition-all cursor-pointer ${
                     statusFilter === st
-                      ? 'bg-blue-600 text-white shadow-xs'
-                      : 'bg-white border border-slate-200 text-slate-600 hover:bg-slate-50'
+                      ? 'bg-slate-900 text-white shadow-xs'
+                      : 'bg-white border border-slate-200/80 text-slate-600 hover:bg-slate-50'
                   }`}
                 >
                   {st.replace('_', ' ')}
@@ -220,9 +220,9 @@ export default function CustomerDashboardPage() {
             </div>
 
             {isLoading ? (
-              <div className="text-center py-12 text-slate-400 text-sm">Loading bookings...</div>
+              <div className="text-center py-16 text-slate-400 text-sm">Loading bookings...</div>
             ) : requests.length === 0 ? (
-              <div className="bg-white rounded-3xl border border-slate-200/80 p-12 text-center max-w-md mx-auto">
+              <div className="bg-white rounded-3xl border border-slate-200/80 p-12 text-center max-w-md mx-auto shadow-card">
                 <Calendar className="w-12 h-12 text-slate-300 mx-auto mb-3" />
                 <h3 className="font-bold text-slate-900 text-base">No Service Requests Found</h3>
                 <p className="text-xs text-slate-500 mt-1 mb-6">
@@ -246,11 +246,11 @@ export default function CustomerDashboardPage() {
                   return (
                     <div
                       key={req.id}
-                      className="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200/80 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-6"
+                      className="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200/80 shadow-card flex flex-col md:flex-row md:items-center justify-between gap-6"
                     >
                       {/* Left: Tech info & booking meta */}
                       <div className="flex items-start gap-4 flex-1">
-                        <div className="w-16 h-16 rounded-2xl overflow-hidden bg-slate-100 relative shrink-0">
+                        <div className="w-16 h-16 rounded-2xl overflow-hidden bg-slate-100 relative shrink-0 border border-slate-200/60">
                           <Image src={avatar} alt={tech?.user?.name || 'Technician'} fill className="object-cover" />
                         </div>
 
@@ -265,7 +265,7 @@ export default function CustomerDashboardPage() {
                             {getStatusBadge(req.status)}
                           </div>
 
-                          <p className="text-sm font-semibold text-blue-700">{req.serviceTitle}</p>
+                          <p className="text-sm font-bold text-blue-700">{req.serviceTitle}</p>
                           <p className="text-xs text-slate-600 line-clamp-2 leading-relaxed">
                             {req.description}
                           </p>
@@ -335,9 +335,9 @@ export default function CustomerDashboardPage() {
 
         {/* Tab 2: Saved Technicians */}
         {activeTab === 'favorites' && (
-          <div>
+          <div className="animate-fade-in">
             {favorites.length === 0 ? (
-              <div className="bg-white rounded-3xl border border-slate-200/80 p-12 text-center max-w-md mx-auto">
+              <div className="bg-white rounded-3xl border border-slate-200/80 p-12 text-center max-w-md mx-auto shadow-card">
                 <Heart className="w-12 h-12 text-slate-300 mx-auto mb-3" />
                 <h3 className="font-bold text-slate-900 text-base">No Saved Technicians</h3>
                 <p className="text-xs text-slate-500 mt-1 mb-6">
@@ -362,12 +362,12 @@ export default function CustomerDashboardPage() {
                   return (
                     <div
                       key={fav.id}
-                      className="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-xs flex flex-col justify-between"
+                      className="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-card flex flex-col justify-between"
                     >
                       <div>
                         <div className="flex items-start justify-between gap-3 mb-4">
                           <div className="flex items-center gap-3">
-                            <div className="w-14 h-14 rounded-2xl overflow-hidden bg-slate-100 relative shrink-0">
+                            <div className="w-14 h-14 rounded-2xl overflow-hidden bg-slate-100 relative shrink-0 border border-slate-200/60">
                               <Image src={avatar} alt={tech.user?.name} fill className="object-cover" />
                             </div>
                             <div>
@@ -429,10 +429,10 @@ export default function CustomerDashboardPage() {
 
         {/* Tab 3: Notifications */}
         {activeTab === 'notifications' && (
-          <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-xs">
+          <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-card animate-fade-in">
             <h2 className="text-lg font-bold text-slate-900 mb-4">Notification History</h2>
             {notifications.length === 0 ? (
-              <p className="text-xs text-slate-400 py-8 text-center">No notifications yet.</p>
+              <p className="text-xs text-slate-400 py-12 text-center">No notifications yet.</p>
             ) : (
               <div className="divide-y divide-slate-100">
                 {notifications.map((n) => (

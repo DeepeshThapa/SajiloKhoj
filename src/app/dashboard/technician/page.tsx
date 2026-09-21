@@ -30,7 +30,6 @@ import {
   updateTechnicianProfile,
   addTechnicianService,
   deleteTechnicianService,
-  getTechnicianById,
   getMyTechnicianProfile,
 } from '@/lib/actions/technicians';
 import { replyToReview } from '@/lib/actions/reviews';
@@ -207,11 +206,11 @@ export default function TechnicianDashboardPage() {
   const completedJobs = requests.filter((r) => r.status === 'COMPLETED');
 
   return (
-    <div className="min-h-screen bg-slate-50 py-8 sm:py-12">
+    <div className="min-h-screen bg-[#fafbfc] py-8 sm:py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         {/* Verification Status Alert */}
         {profile?.verificationStatus === 'PENDING' && (
-          <div className="p-5 rounded-3xl bg-amber-50 border border-amber-200 text-amber-900 flex items-start gap-3 shadow-xs">
+          <div className="p-5 rounded-3xl bg-amber-50/80 border border-amber-200/80 text-amber-900 flex items-start gap-3 shadow-card">
             <AlertTriangle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
             <div>
               <h4 className="font-bold text-sm">Account Awaiting Admin Approval</h4>
@@ -223,7 +222,7 @@ export default function TechnicianDashboardPage() {
         )}
 
         {profile?.verificationStatus === 'SUSPENDED' && (
-          <div className="p-5 rounded-3xl bg-rose-50 border border-rose-200 text-rose-900 flex items-start gap-3">
+          <div className="p-5 rounded-3xl bg-rose-50/80 border border-rose-200/80 text-rose-900 flex items-start gap-3 shadow-card">
             <XCircle className="w-5 h-5 text-rose-600 shrink-0 mt-0.5" />
             <div>
               <h4 className="font-bold text-sm">Account Suspended</h4>
@@ -235,12 +234,12 @@ export default function TechnicianDashboardPage() {
         )}
 
         {/* Dashboard Header Banner with Availability Toggle */}
-        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-6">
+        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-card flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div>
-            <span className="text-xs font-bold text-teal-600 uppercase tracking-wider">
+            <span className="text-[11px] font-bold text-teal-700 uppercase tracking-wider">
               Technician Workspace
             </span>
-            <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight mt-1">
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mt-0.5">
               {profile?.businessName || 'Service Provider Dashboard'}
             </h1>
             <p className="text-xs sm:text-sm text-slate-500 mt-1">
@@ -249,7 +248,7 @@ export default function TechnicianDashboardPage() {
           </div>
 
           {/* Quick Availability Switcher */}
-          <div className="flex items-center gap-3 bg-slate-50 p-2 rounded-2xl border border-slate-200/80">
+          <div className="flex items-center gap-3 bg-slate-50/80 p-2 rounded-2xl border border-slate-200/80">
             <span className="text-xs font-bold text-slate-600 uppercase tracking-wider pl-2">
               Status:
             </span>
@@ -257,7 +256,7 @@ export default function TechnicianDashboardPage() {
               value={availability}
               disabled={isUpdatingAvail}
               onChange={(e) => handleAvailabilityChange(e.target.value as Availability)}
-              className="px-3 py-1.5 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal-500 cursor-pointer shadow-2xs"
+              className="px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal-500 cursor-pointer shadow-xs"
             >
               <option value="AVAILABLE_NOW">🟢 Available Now</option>
               <option value="AVAILABLE_TODAY">🔵 Available Today</option>
@@ -270,79 +269,79 @@ export default function TechnicianDashboardPage() {
 
         {/* Stats Grid */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-          <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs">
+          <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-card">
             <div className="flex items-center justify-between text-slate-400 mb-2">
-              <span className="text-xs font-bold uppercase tracking-wider">Pending Orders</span>
+              <span className="text-xs font-bold uppercase tracking-wider text-amber-600">Pending Orders</span>
               <Clock className="w-4 h-4 text-amber-500" />
             </div>
-            <p className="text-2xl font-black text-slate-900">{pendingRequests.length}</p>
+            <p className="text-2xl font-extrabold text-slate-900">{pendingRequests.length}</p>
           </div>
 
-          <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs">
+          <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-card">
             <div className="flex items-center justify-between text-slate-400 mb-2">
-              <span className="text-xs font-bold uppercase tracking-wider">Active Jobs</span>
+              <span className="text-xs font-bold uppercase tracking-wider text-blue-700">Active Jobs</span>
               <Wrench className="w-4 h-4 text-blue-600" />
             </div>
-            <p className="text-2xl font-black text-slate-900">{activeJobs.length}</p>
+            <p className="text-2xl font-extrabold text-slate-900">{activeJobs.length}</p>
           </div>
 
-          <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs">
+          <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-card">
             <div className="flex items-center justify-between text-slate-400 mb-2">
-              <span className="text-xs font-bold uppercase tracking-wider">Completed</span>
-              <CheckCircle className="w-4 h-4 text-emerald-600" />
+              <span className="text-xs font-bold uppercase tracking-wider text-teal-700">Completed</span>
+              <CheckCircle className="w-4 h-4 text-teal-600" />
             </div>
-            <p className="text-2xl font-black text-slate-900">{completedJobs.length}</p>
+            <p className="text-2xl font-extrabold text-slate-900">{completedJobs.length}</p>
           </div>
 
-          <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs">
+          <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-card">
             <div className="flex items-center justify-between text-slate-400 mb-2">
-              <span className="text-xs font-bold uppercase tracking-wider">Rating</span>
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-500">Rating</span>
               <Star className="w-4 h-4 text-amber-400 fill-amber-400" />
             </div>
-            <p className="text-2xl font-black text-slate-900">
+            <p className="text-2xl font-extrabold text-slate-900">
               {profile?.rating ? profile.rating.toFixed(1) : '5.0'} ★
             </p>
           </div>
         </div>
 
         {/* Dashboard Navigation Tabs */}
-        <div className="border-b border-slate-200 flex items-center gap-4 overflow-x-auto">
+        <div className="border-b border-slate-200 flex items-center gap-2 sm:gap-3 overflow-x-auto pb-1">
           <button
             onClick={() => setActiveTab('requests')}
-            className={`pb-3 text-sm font-bold border-b-2 whitespace-nowrap transition-all cursor-pointer ${
+            className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all cursor-pointer ${
               activeTab === 'requests'
-                ? 'border-teal-600 text-teal-700'
-                : 'border-transparent text-slate-500 hover:text-slate-900'
+                ? 'bg-teal-700 text-white shadow-xs'
+                : 'text-slate-600 hover:text-slate-900 hover:bg-white border border-transparent hover:border-slate-200/80'
             }`}
           >
             Service Bookings ({requests.length})
           </button>
           <button
             onClick={() => setActiveTab('services')}
-            className={`pb-3 text-sm font-bold border-b-2 whitespace-nowrap transition-all cursor-pointer ${
+            className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all cursor-pointer ${
               activeTab === 'services'
-                ? 'border-teal-600 text-teal-700'
-                : 'border-transparent text-slate-500 hover:text-slate-900'
+                ? 'bg-teal-700 text-white shadow-xs'
+                : 'text-slate-600 hover:text-slate-900 hover:bg-white border border-transparent hover:border-slate-200/80'
             }`}
           >
             Services & Rates
           </button>
           <button
             onClick={() => setActiveTab('profile')}
-            className={`pb-3 text-sm font-bold border-b-2 whitespace-nowrap transition-all cursor-pointer ${
+            className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all cursor-pointer ${
               activeTab === 'profile'
-                ? 'border-teal-600 text-teal-700'
-                : 'border-transparent text-slate-500 hover:text-slate-900'
+                ? 'bg-teal-700 text-white shadow-xs'
+                : 'text-slate-600 hover:text-slate-900 hover:bg-white border border-transparent hover:border-slate-200/80'
             }`}
           >
             Profile & Coverage
           </button>
           <button
             onClick={() => setActiveTab('reviews')}
-            className={`pb-3 text-sm font-bold border-b-2 whitespace-nowrap transition-all cursor-pointer ${
+            className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all cursor-pointer ${
               activeTab === 'reviews'
-                ? 'border-teal-600 text-teal-700'
-                : 'border-transparent text-slate-500 hover:text-slate-900'
+                ? 'bg-teal-700 text-white shadow-xs'
+                : 'text-slate-600 hover:text-slate-900 hover:bg-white border border-transparent hover:border-slate-200/80'
             }`}
           >
             Customer Reviews
@@ -351,7 +350,7 @@ export default function TechnicianDashboardPage() {
 
         {/* TAB 1: SERVICE REQUESTS MANAGEMENT */}
         {activeTab === 'requests' && (
-          <div className="space-y-6">
+          <div className="space-y-6 animate-fade-in">
             {/* Filter Pills */}
             <div className="flex items-center gap-2 overflow-x-auto pb-2">
               {['ALL', 'PENDING', 'ACCEPTED', 'IN_PROGRESS', 'COMPLETED', 'CANCELLED', 'REJECTED'].map(
@@ -359,10 +358,10 @@ export default function TechnicianDashboardPage() {
                   <button
                     key={st}
                     onClick={() => setStatusFilter(st)}
-                    className={`px-3 py-1.5 rounded-xl text-xs font-bold uppercase tracking-wider whitespace-nowrap transition-colors cursor-pointer ${
+                    className={`px-3 py-1.5 rounded-xl text-xs font-bold uppercase tracking-wider whitespace-nowrap transition-all cursor-pointer ${
                       statusFilter === st
-                        ? 'bg-teal-700 text-white shadow-xs'
-                        : 'bg-white border border-slate-200 text-slate-600 hover:bg-slate-50'
+                        ? 'bg-slate-900 text-white shadow-xs'
+                        : 'bg-white border border-slate-200/80 text-slate-600 hover:bg-slate-50'
                     }`}
                   >
                     {st.replace('_', ' ')}
@@ -372,7 +371,7 @@ export default function TechnicianDashboardPage() {
             </div>
 
             {requests.length === 0 ? (
-              <div className="bg-white rounded-3xl border border-slate-200/80 p-12 text-center max-w-md mx-auto">
+              <div className="bg-white rounded-3xl border border-slate-200/80 p-12 text-center max-w-md mx-auto shadow-card">
                 <Calendar className="w-12 h-12 text-slate-300 mx-auto mb-3" />
                 <h3 className="font-bold text-slate-900 text-base">No Bookings Found</h3>
                 <p className="text-xs text-slate-500 mt-1">
@@ -384,7 +383,7 @@ export default function TechnicianDashboardPage() {
                 {requests.map((req) => (
                   <div
                     key={req.id}
-                    className="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200/80 shadow-xs flex flex-col lg:flex-row lg:items-center justify-between gap-6"
+                    className="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200/80 shadow-card flex flex-col lg:flex-row lg:items-center justify-between gap-6"
                   >
                     <div className="space-y-2 flex-1">
                       <div className="flex items-center gap-2 flex-wrap">
@@ -407,7 +406,7 @@ export default function TechnicianDashboardPage() {
                       </div>
 
                       <p className="text-sm font-bold text-teal-800">{req.serviceTitle}</p>
-                      <p className="text-xs text-slate-600 leading-relaxed bg-slate-50 p-3 rounded-xl border border-slate-100">
+                      <p className="text-xs text-slate-600 leading-relaxed bg-slate-50 p-3.5 rounded-2xl border border-slate-100">
                         {req.description}
                       </p>
 
@@ -483,7 +482,7 @@ export default function TechnicianDashboardPage() {
 
         {/* TAB 2: SERVICES & PRICING MENU */}
         {activeTab === 'services' && (
-          <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-xs space-y-6">
+          <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-card space-y-6 animate-fade-in">
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="text-lg font-bold text-slate-900">Custom Services & Tariff</h2>
@@ -504,12 +503,12 @@ export default function TechnicianDashboardPage() {
             {isAddingService && (
               <form
                 onSubmit={handleAddService}
-                className="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-4 animate-fade-in"
+                className="bg-slate-50/80 p-5 sm:p-6 rounded-2xl border border-slate-200/80 space-y-4 animate-fade-in"
               >
                 <h3 className="text-sm font-bold text-slate-900">New Service Item</h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-semibold text-slate-700 uppercase mb-1">
+                    <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
                       Service Title *
                     </label>
                     <input
@@ -518,12 +517,12 @@ export default function TechnicianDashboardPage() {
                       value={newServiceTitle}
                       onChange={(e) => setNewServiceTitle(e.target.value)}
                       placeholder="e.g. Bathroom Basin Mixer Fitting"
-                      className="w-full px-3 py-2 bg-white rounded-xl border border-slate-200 text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                      className="w-full px-3.5 py-2.5 bg-white rounded-xl border border-slate-200 text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal-500"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-slate-700 uppercase mb-1">
+                    <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
                       Price (Rs.) *
                     </label>
                     <input
@@ -533,13 +532,13 @@ export default function TechnicianDashboardPage() {
                       value={newServicePrice}
                       onChange={(e) => setNewServicePrice(e.target.value)}
                       placeholder="e.g. 800"
-                      className="w-full px-3 py-2 bg-white rounded-xl border border-slate-200 text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                      className="w-full px-3.5 py-2.5 bg-white rounded-xl border border-slate-200 text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal-500"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 uppercase mb-1">
+                  <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
                     Description (Optional)
                   </label>
                   <input
@@ -547,7 +546,7 @@ export default function TechnicianDashboardPage() {
                     value={newServiceDesc}
                     onChange={(e) => setNewServiceDesc(e.target.value)}
                     placeholder="Includes pipe alignment and silicon sealing..."
-                    className="w-full px-3 py-2 bg-white rounded-xl border border-slate-200 text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    className="w-full px-3.5 py-2.5 bg-white rounded-xl border border-slate-200 text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal-500"
                   />
                 </div>
 
@@ -603,7 +602,7 @@ export default function TechnicianDashboardPage() {
 
         {/* TAB 3: PROFILE SETTINGS */}
         {activeTab === 'profile' && (
-          <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-xs">
+          <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-card animate-fade-in">
             <h2 className="text-lg font-bold text-slate-900 mb-1">Technician Profile Settings</h2>
             <p className="text-xs text-slate-500 mb-6">
               Update your public biography, pricing, certifications, and service address.
@@ -619,19 +618,19 @@ export default function TechnicianDashboardPage() {
             <form onSubmit={handleSaveProfile} className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 uppercase mb-1">
+                  <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
                     Business / Display Name
                   </label>
                   <input
                     type="text"
                     value={businessName}
                     onChange={(e) => setBusinessName(e.target.value)}
-                    className="w-full px-3 py-2 bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-900 focus:bg-white"
+                    className="w-full px-3.5 py-2.5 bg-slate-50/50 rounded-xl border border-slate-200 text-xs text-slate-900 focus:bg-white focus:outline-none focus:ring-2 focus:ring-teal-500"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 uppercase mb-1">
+                  <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
                     Contact Phone Number
                   </label>
                   <input
@@ -639,26 +638,26 @@ export default function TechnicianDashboardPage() {
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     placeholder="+977 98XXXXXXXX"
-                    className="w-full px-3 py-2 bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-900 focus:bg-white"
+                    className="w-full px-3.5 py-2.5 bg-slate-50/50 rounded-xl border border-slate-200 text-xs text-slate-900 focus:bg-white focus:outline-none focus:ring-2 focus:ring-teal-500"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-700 uppercase mb-1">
+                <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
                   Professional Bio & Experience
                 </label>
                 <textarea
                   rows={4}
                   value={bio}
                   onChange={(e) => setBio(e.target.value)}
-                  className="w-full p-3 bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-900 focus:bg-white"
+                  className="w-full p-3.5 bg-slate-50/50 rounded-xl border border-slate-200 text-xs text-slate-900 focus:bg-white focus:outline-none focus:ring-2 focus:ring-teal-500"
                 />
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 uppercase mb-1">
+                  <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
                     Skills (Comma separated)
                   </label>
                   <input
@@ -666,12 +665,12 @@ export default function TechnicianDashboardPage() {
                     value={skills}
                     onChange={(e) => setSkills(e.target.value)}
                     placeholder="Pipe Fitting, PPR Welding, Water Tank Setup"
-                    className="w-full px-3 py-2 bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-900 focus:bg-white"
+                    className="w-full px-3.5 py-2.5 bg-slate-50/50 rounded-xl border border-slate-200 text-xs text-slate-900 focus:bg-white focus:outline-none focus:ring-2 focus:ring-teal-500"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 uppercase mb-1">
+                  <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
                     Certifications & Trade Licenses
                   </label>
                   <input
@@ -679,38 +678,38 @@ export default function TechnicianDashboardPage() {
                     value={certifications}
                     onChange={(e) => setCertifications(e.target.value)}
                     placeholder="CTEVT Level 2 Master Plumber"
-                    className="w-full px-3 py-2 bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-900 focus:bg-white"
+                    className="w-full px-3.5 py-2.5 bg-slate-50/50 rounded-xl border border-slate-200 text-xs text-slate-900 focus:bg-white focus:outline-none focus:ring-2 focus:ring-teal-500"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 uppercase mb-1">
+                  <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
                     Starting Price (Rs.)
                   </label>
                   <input
                     type="number"
                     value={startingPrice}
                     onChange={(e) => setStartingPrice(e.target.value)}
-                    className="w-full px-3 py-2 bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-900 focus:bg-white"
+                    className="w-full px-3.5 py-2.5 bg-slate-50/50 rounded-xl border border-slate-200 text-xs text-slate-900 focus:bg-white focus:outline-none focus:ring-2 focus:ring-teal-500"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 uppercase mb-1">
+                  <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
                     Hourly Tariff (Rs. / hr)
                   </label>
                   <input
                     type="number"
                     value={hourlyRate}
                     onChange={(e) => setHourlyRate(e.target.value)}
-                    className="w-full px-3 py-2 bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-900 focus:bg-white"
+                    className="w-full px-3.5 py-2.5 bg-slate-50/50 rounded-xl border border-slate-200 text-xs text-slate-900 focus:bg-white focus:outline-none focus:ring-2 focus:ring-teal-500"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 uppercase mb-1">
+                  <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
                     Working Hours
                   </label>
                   <input
@@ -718,13 +717,13 @@ export default function TechnicianDashboardPage() {
                     value={workingHours}
                     onChange={(e) => setWorkingHours(e.target.value)}
                     placeholder="7:00 AM - 7:00 PM"
-                    className="w-full px-3 py-2 bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-900 focus:bg-white"
+                    className="w-full px-3.5 py-2.5 bg-slate-50/50 rounded-xl border border-slate-200 text-xs text-slate-900 focus:bg-white focus:outline-none focus:ring-2 focus:ring-teal-500"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-700 uppercase mb-1">
+                <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
                   Workshop / Base Address
                 </label>
                 <input
@@ -732,7 +731,7 @@ export default function TechnicianDashboardPage() {
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
                   placeholder="Shankhamul Road, New Baneshwor, Ward 10"
-                  className="w-full px-3 py-2 bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-900 focus:bg-white"
+                  className="w-full px-3.5 py-2.5 bg-slate-50/50 rounded-xl border border-slate-200 text-xs text-slate-900 focus:bg-white focus:outline-none focus:ring-2 focus:ring-teal-500"
                 />
               </div>
 
@@ -747,7 +746,7 @@ export default function TechnicianDashboardPage() {
 
         {/* TAB 4: REVIEWS & REPLIES */}
         {activeTab === 'reviews' && (
-          <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-xs space-y-6">
+          <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-card space-y-6 animate-fade-in">
             <h2 className="text-lg font-bold text-slate-900">Customer Feedback & Replies</h2>
 
             {profile?.reviews && profile.reviews.length > 0 ? (
@@ -769,9 +768,9 @@ export default function TechnicianDashboardPage() {
                     <p className="text-xs text-slate-600 leading-relaxed">{rev.comment}</p>
 
                     {rev.technicianReply ? (
-                      <div className="p-3 bg-teal-50/60 rounded-xl border border-teal-100 text-xs text-teal-900">
+                      <div className="p-3.5 bg-teal-50/70 rounded-2xl border border-teal-100 text-xs text-teal-900">
                         <span className="font-bold block text-[11px]">Your Reply:</span>
-                        <p>{rev.technicianReply}</p>
+                        <p className="mt-0.5">{rev.technicianReply}</p>
                       </div>
                     ) : replyingReviewId === rev.id ? (
                       <div className="space-y-2 pt-2">
@@ -780,7 +779,7 @@ export default function TechnicianDashboardPage() {
                           value={replyText}
                           onChange={(e) => setReplyText(e.target.value)}
                           placeholder="Write a polite response thanking the customer..."
-                          className="w-full p-2.5 bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-900 focus:bg-white"
+                          className="w-full p-3 bg-slate-50/50 rounded-xl border border-slate-200 text-xs text-slate-900 focus:bg-white focus:outline-none focus:ring-2 focus:ring-teal-500"
                         />
                         <div className="flex gap-2 justify-end">
                           <Button
@@ -805,7 +804,7 @@ export default function TechnicianDashboardPage() {
                           setReplyingReviewId(rev.id);
                           setReplyText('');
                         }}
-                        className="text-xs font-semibold text-teal-700 hover:text-teal-800 flex items-center gap-1 cursor-pointer"
+                        className="text-xs font-bold text-teal-700 hover:text-teal-800 flex items-center gap-1.5 cursor-pointer"
                       >
                         <MessageSquare className="w-3.5 h-3.5" /> Reply to Review
                       </button>
@@ -814,7 +813,7 @@ export default function TechnicianDashboardPage() {
                 ))}
               </div>
             ) : (
-              <p className="text-xs text-slate-400 py-6 text-center">No reviews received yet.</p>
+              <p className="text-xs text-slate-400 py-8 text-center">No reviews received yet.</p>
             )}
           </div>
         )}

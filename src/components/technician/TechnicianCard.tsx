@@ -109,12 +109,12 @@ export function TechnicianCard({
     'https://images.unsplash.com/photo-1540569014015-19a7be504e3a?w=200&auto=format&fit=crop&q=80';
 
   return (
-    <div className="group bg-white rounded-2xl border border-slate-200/80 hover:border-blue-400 hover:shadow-xl hover:shadow-blue-500/5 transition-all duration-300 flex flex-col justify-between overflow-hidden relative">
+    <div className="group bg-white rounded-2xl border border-slate-200/80 shadow-card shadow-card-hover flex flex-col justify-between overflow-hidden relative">
       {/* Featured Ribbon */}
       {technician.isFeatured && (
         <div className="absolute top-3 left-3 z-10">
-          <span className="inline-flex items-center gap-1 text-[10px] font-extrabold uppercase tracking-wider bg-gradient-to-r from-amber-500 to-amber-600 text-white px-2.5 py-0.5 rounded-full shadow-xs">
-            <Sparkles className="w-3 h-3" /> Featured Pro
+          <span className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider bg-amber-50 text-amber-900 border border-amber-200/80 px-2.5 py-0.5 rounded-full shadow-2xs">
+            <Sparkles className="w-3 h-3 text-amber-600" /> Featured
           </span>
         </div>
       )}
@@ -123,11 +123,11 @@ export function TechnicianCard({
       <button
         onClick={handleFavoriteToggle}
         disabled={isFavLoading}
-        className="absolute top-3 right-3 z-10 p-2 rounded-full bg-white/90 backdrop-blur-xs border border-slate-200/80 text-slate-400 hover:text-rose-600 hover:bg-white shadow-xs transition-transform hover:scale-110 cursor-pointer"
+        className="absolute top-3 right-3 z-10 p-2 rounded-full bg-white/95 border border-slate-200/80 text-slate-400 hover:text-rose-600 hover:bg-white shadow-2xs transition-all active:scale-95 cursor-pointer"
         aria-label="Save technician"
       >
         <Heart
-          className={`w-4 h-4 transition-colors ${
+          className={`w-3.5 h-3.5 transition-colors ${
             isFavorite ? 'fill-rose-500 text-rose-500' : ''
           }`}
         />
@@ -136,8 +136,8 @@ export function TechnicianCard({
       {/* Card Header & Profile */}
       <div className="p-5 sm:p-6 pb-4">
         <div className="flex items-start gap-4">
-          <Link href={`/technicians/${technician.id}`} className="shrink-0 relative group-hover:scale-105 transition-transform">
-            <div className="w-16 h-16 sm:w-18 sm:h-18 rounded-2xl overflow-hidden bg-slate-100 border-2 border-white shadow-md relative">
+          <Link href={`/technicians/${technician.id}`} className="shrink-0 relative group-hover:opacity-90 transition-opacity">
+            <div className="w-16 h-16 sm:w-18 sm:h-18 rounded-2xl overflow-hidden bg-slate-100 border border-slate-200/70 shadow-2xs relative">
               <Image
                 src={avatarSrc}
                 alt={technician.user.name}
@@ -189,7 +189,7 @@ export function TechnicianCard({
 
           <div className="flex items-center gap-1 text-slate-500 font-medium truncate max-w-[140px]">
             <MapPin className="w-3.5 h-3.5 text-slate-400 shrink-0" />
-            <span className="truncate">
+            <span className="truncate text-xs">
               {technician.locality ? `${technician.locality}, ` : ''}
               {technician.city}
             </span>
@@ -197,7 +197,7 @@ export function TechnicianCard({
         </div>
 
         {/* Short Bio snippet */}
-        <p className="mt-3 text-xs text-slate-600 line-clamp-2 leading-relaxed">
+        <p className="mt-3 text-xs text-slate-500 line-clamp-2 leading-relaxed">
           {technician.bio}
         </p>
 
@@ -207,7 +207,7 @@ export function TechnicianCard({
             {technician.services.slice(0, 2).map((srv) => (
               <span
                 key={srv.id}
-                className="text-[10px] font-medium text-slate-600 bg-slate-100 px-2 py-0.5 rounded-md truncate max-w-[130px]"
+                className="text-[10px] font-medium text-slate-600 bg-slate-50 border border-slate-200/60 px-2 py-0.5 rounded-lg truncate max-w-[130px]"
               >
                 {srv.title}
               </span>
@@ -222,12 +222,12 @@ export function TechnicianCard({
       </div>
 
       {/* Card Footer with Price & Actions */}
-      <div className="px-5 sm:px-6 py-4 bg-slate-50/70 border-t border-slate-100 flex items-center justify-between gap-2">
+      <div className="px-5 sm:px-6 py-4 bg-slate-50/50 border-t border-slate-100 flex items-center justify-between gap-2">
         <div>
-          <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">
+          <span className="text-[9px] font-bold text-slate-400 uppercase tracking-wider block">
             Starting Rate
           </span>
-          <span className="text-base font-extrabold text-slate-900">
+          <span className="text-sm sm:text-base font-bold text-slate-900">
             Rs. {technician.startingPrice.toLocaleString()}
           </span>
         </div>

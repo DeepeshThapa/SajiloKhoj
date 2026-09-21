@@ -65,18 +65,29 @@ export default async function ServicesPage() {
     },
   };
 
+  const categoryColorMap: Record<string, { bg: string; text: string; border: string }> = {
+    plumbing: { bg: 'bg-blue-50/90', text: 'text-blue-600', border: 'border-blue-200/60' },
+    electrical: { bg: 'bg-amber-50/90', text: 'text-amber-600', border: 'border-amber-200/60' },
+    'ac-repair': { bg: 'bg-sky-50/90', text: 'text-sky-600', border: 'border-sky-200/60' },
+    'appliance-repair': { bg: 'bg-purple-50/90', text: 'text-purple-600', border: 'border-purple-200/60' },
+    carpentry: { bg: 'bg-orange-50/90', text: 'text-orange-600', border: 'border-orange-200/60' },
+    painting: { bg: 'bg-rose-50/90', text: 'text-rose-600', border: 'border-rose-200/60' },
+    cleaning: { bg: 'bg-teal-50/90', text: 'text-teal-600', border: 'border-teal-200/60' },
+    handyman: { bg: 'bg-slate-100/90', text: 'text-slate-700', border: 'border-slate-200/80' },
+  };
+
   return (
-    <div className="min-h-screen bg-slate-50 py-12 sm:py-16">
+    <div className="min-h-screen bg-[#fafbfc] py-12 sm:py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-          <span className="inline-block text-xs font-bold text-blue-600 uppercase tracking-wider bg-blue-50 px-3 py-1 rounded-full border border-blue-100">
+        <div className="text-center max-w-3xl mx-auto mb-14 space-y-4">
+          <span className="inline-block text-xs font-bold text-blue-600 uppercase tracking-wider bg-blue-50/90 px-3 py-1 rounded-full border border-blue-200/60">
             Platform Service Directory
           </span>
-          <h1 className="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight">
+          <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
             All Home Repair & Maintenance Services
           </h1>
-          <p className="text-base text-slate-600 leading-relaxed">
+          <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
             Discover specialized CTEVT-certified technicians across 8 core household and commercial trade categories in Nepal.
           </p>
         </div>
@@ -85,6 +96,11 @@ export default async function ServicesPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {categories.map((cat) => {
             const Icon = categoryIconMap[cat.slug] || Wrench;
+            const colorInfo = categoryColorMap[cat.slug] || {
+              bg: 'bg-slate-100',
+              text: 'text-slate-700',
+              border: 'border-slate-200',
+            };
             const meta = serviceHighlights[cat.slug] || {
               typical: ['Inspection & Diagnosis', 'Standard Repairs', 'New Installation'],
               avgStarting: 'Rs. 500',
@@ -93,17 +109,17 @@ export default async function ServicesPage() {
             return (
               <div
                 key={cat.id}
-                className="bg-white rounded-3xl p-7 sm:p-8 border border-slate-200/80 shadow-xs hover:shadow-xl hover:border-blue-400 transition-all duration-300 flex flex-col justify-between"
+                className="bg-white rounded-3xl p-7 sm:p-8 border border-slate-200/80 shadow-card shadow-card-hover flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-center justify-between gap-4 mb-5">
                     <div className="flex items-center gap-3.5">
-                      <div className="w-14 h-14 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 shadow-xs">
-                        <Icon className="w-7 h-7" />
+                      <div className={`w-12 h-12 rounded-2xl ${colorInfo.bg} ${colorInfo.text} border ${colorInfo.border} flex items-center justify-center shrink-0`}>
+                        <Icon className="w-6 h-6" />
                       </div>
                       <div>
-                        <h2 className="text-xl font-bold text-slate-900">{cat.name}</h2>
-                        <span className="text-xs font-semibold text-slate-400">
+                        <h2 className="text-lg font-bold text-slate-900">{cat.name}</h2>
+                        <span className="text-xs font-medium text-slate-400">
                           {cat._count?.technicians || 0} active specialists
                         </span>
                       </div>
@@ -112,18 +128,18 @@ export default async function ServicesPage() {
                       <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">
                         Avg Starting
                       </span>
-                      <span className="text-base font-extrabold text-slate-900">
+                      <span className="text-sm sm:text-base font-bold text-slate-900">
                         {meta.avgStarting}
                       </span>
                     </div>
                   </div>
 
-                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-6">
+                  <p className="text-xs sm:text-sm text-slate-500 leading-relaxed mb-6">
                     {cat.description}
                   </p>
 
-                  <div className="space-y-2 mb-6 bg-slate-50 p-4 rounded-2xl border border-slate-100">
-                    <span className="text-xs font-bold text-slate-800 block mb-1">
+                  <div className="space-y-2 mb-6 bg-slate-50/70 p-4 rounded-2xl border border-slate-100">
+                    <span className="text-xs font-bold text-slate-900 block mb-1">
                       Common Services in this Category:
                     </span>
                     {meta.typical.map((item, idx) => (
@@ -136,7 +152,7 @@ export default async function ServicesPage() {
                 </div>
 
                 <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
-                  <span className="text-xs font-medium text-slate-500">
+                  <span className="text-xs font-medium text-slate-400">
                     Background verified pros
                   </span>
                   <Link href={`/technicians?category=${cat.slug}`}>

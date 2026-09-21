@@ -43,14 +43,14 @@ export function TechnicianProfileActions({ technician }: TechnicianProfileAction
 
   return (
     <>
-      <div className="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200/80 shadow-md space-y-6">
+      <div className="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200/80 shadow-card space-y-6">
         {/* Pricing Summary */}
         <div className="flex items-center justify-between pb-5 border-b border-slate-100">
           <div>
             <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">
               Estimated Starting Rate
             </span>
-            <span className="text-2xl font-black text-slate-900">
+            <span className="text-2xl font-bold text-slate-900 tracking-tight">
               Rs. {technician.startingPrice.toLocaleString()}
             </span>
           </div>
@@ -59,7 +59,7 @@ export function TechnicianProfileActions({ technician }: TechnicianProfileAction
               <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">
                 Hourly Tariff
               </span>
-              <span className="text-base font-bold text-slate-700">
+              <span className="text-base font-semibold text-slate-700">
                 Rs. {technician.hourlyRate}/hr
               </span>
             </div>
@@ -71,10 +71,10 @@ export function TechnicianProfileActions({ technician }: TechnicianProfileAction
           <Button
             size="lg"
             variant="primary"
-            className="w-full text-base font-bold py-3.5 shadow-lg shadow-blue-600/20"
+            className="w-full text-sm sm:text-base font-bold py-3.5 shadow-xs"
             onClick={() => setIsModalOpen(true)}
           >
-            <Calendar className="w-5 h-5 mr-2" /> Request Service
+            <Calendar className="w-4 h-4 mr-2" /> Request Service
           </Button>
 
           <div className="grid grid-cols-2 gap-2">
@@ -83,10 +83,10 @@ export function TechnicianProfileActions({ technician }: TechnicianProfileAction
               size="sm"
               disabled={isFavLoading}
               onClick={handleFavoriteToggle}
-              className={`w-full text-xs font-semibold ${isFavorite ? 'text-rose-600 border-rose-200 bg-rose-50' : ''}`}
+              className={`w-full text-xs font-semibold ${isFavorite ? 'text-rose-600 border-rose-200 bg-rose-50/80' : ''}`}
             >
-              <Heart className={`w-4 h-4 mr-1.5 ${isFavorite ? 'fill-rose-500 text-rose-500' : ''}`} />
-              {isFavorite ? 'Saved' : 'Save'}
+              <Heart className={`w-3.5 h-3.5 mr-1.5 ${isFavorite ? 'fill-rose-500 text-rose-500' : ''}`} />
+              {isFavorite ? 'Saved' : 'Save Pro'}
             </Button>
 
             <Button
@@ -95,7 +95,7 @@ export function TechnicianProfileActions({ technician }: TechnicianProfileAction
               onClick={handleShare}
               className="w-full text-xs font-semibold"
             >
-              <Share2 className="w-4 h-4 mr-1.5" />
+              <Share2 className="w-3.5 h-3.5 mr-1.5" />
               {isCopied ? 'Link Copied!' : 'Share Profile'}
             </Button>
           </div>

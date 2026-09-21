@@ -92,14 +92,14 @@ export function ReviewModal({
             </div>
           )}
 
-          <div className="p-3 bg-slate-50 rounded-xl text-xs text-slate-600">
-            <span className="font-semibold text-slate-800">Completed Service:</span>{' '}
+          <div className="p-3 bg-slate-50/80 border border-slate-200/70 rounded-2xl text-xs text-slate-600">
+            <span className="font-bold text-slate-900">Completed Service:</span>{' '}
             {serviceRequest.serviceTitle}
           </div>
 
           {/* Interactive Star Rating */}
           <div className="text-center py-2">
-            <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">
+            <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-2">
               Your Overall Rating
             </label>
             <div className="flex justify-center">
@@ -111,7 +111,7 @@ export function ReviewModal({
                 showNumber={false}
               />
             </div>
-            <span className="text-xs font-bold text-amber-700 mt-2 inline-block">
+            <span className="text-xs font-semibold text-amber-700 mt-2 inline-block">
               {rating === 5
                 ? '⭐⭐⭐⭐⭐ Exceptional (5.0)'
                 : rating === 4
@@ -126,7 +126,7 @@ export function ReviewModal({
 
           {/* Written Feedback */}
           <div>
-            <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5">
+            <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-1.5">
               Written Review & Feedback *
             </label>
             <textarea
@@ -135,15 +135,15 @@ export function ReviewModal({
               value={comment}
               onChange={(e) => setComment(e.target.value)}
               placeholder="How was their punctuality, skill quality, cleanliness, and attitude? Was the price reasonable?"
-              className="w-full p-3 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white"
+              className="w-full p-3 rounded-xl border border-slate-200/90 bg-slate-50/60 text-slate-900 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:bg-white"
             />
           </div>
 
-          <div className="pt-3 flex items-center justify-end gap-3 border-t border-slate-100">
-            <Button type="button" variant="outline" onClick={onClose} disabled={isLoading}>
+          <div className="pt-3 flex items-center justify-end gap-2.5 border-t border-slate-100">
+            <Button type="button" variant="outline" size="sm" onClick={onClose} disabled={isLoading}>
               Cancel
             </Button>
-            <Button type="submit" variant="primary" isLoading={isLoading}>
+            <Button type="submit" variant="primary" size="sm" isLoading={isLoading}>
               Publish Review
             </Button>
           </div>

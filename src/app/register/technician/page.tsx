@@ -165,26 +165,26 @@ export default function TechnicianRegistrationPage() {
   ];
 
   return (
-    <div className="min-h-screen py-10 px-4 bg-slate-50">
+    <div className="min-h-screen py-10 px-4 bg-[#fafbfc]">
       <div className="max-w-3xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
           <Link href="/" className="inline-flex items-center gap-2 mb-2">
-            <div className="w-9 h-9 rounded-xl bg-teal-600 flex items-center justify-center text-white shadow-md shadow-teal-600/20">
+            <div className="w-9 h-9 rounded-2xl bg-teal-600 flex items-center justify-center text-white shadow-xs">
               <Briefcase className="w-5 h-5" />
             </div>
             <span className="text-2xl font-black tracking-tight text-slate-900">
-              Sajilo<span className="text-teal-600">Khoj</span> <span className="text-xs bg-teal-100 text-teal-800 px-2 py-0.5 rounded-full font-bold ml-1">PRO</span>
+              Sajilo<span className="text-teal-700">Khoj</span> <span className="text-xs bg-teal-50 text-teal-800 border border-teal-200/60 px-2 py-0.5 rounded-full font-bold ml-1">PRO</span>
             </span>
           </Link>
-          <h1 className="text-2xl sm:text-3xl font-bold text-slate-900">Technician Registration</h1>
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Technician Registration</h1>
           <p className="text-slate-500 text-sm mt-1">
             Join Nepal&apos;s fastest growing verified home service technician network
           </p>
         </div>
 
         {/* Multi-step progress bar */}
-        <div className="bg-white rounded-2xl p-4 sm:p-5 shadow-xs border border-slate-200/80 mb-6">
+        <div className="bg-white rounded-3xl p-4 sm:p-5 shadow-card border border-slate-200/80 mb-6">
           <div className="flex items-center justify-between relative">
             <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-1 bg-slate-100 -z-0" />
             <div
@@ -199,10 +199,10 @@ export default function TechnicianRegistrationPage() {
                   <div
                     className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all ${
                       isCompleted
-                        ? 'bg-teal-600 text-white shadow-sm shadow-teal-500/30'
+                        ? 'bg-teal-700 text-white shadow-xs'
                         : isCurrent
-                        ? 'bg-teal-700 text-white ring-4 ring-teal-100'
-                        : 'bg-white text-slate-400 border-2 border-slate-200'
+                        ? 'bg-teal-700 text-white ring-4 ring-teal-100/80'
+                        : 'bg-white text-slate-400 border border-slate-200'
                     }`}
                   >
                     {isCompleted ? <CheckCircle2 className="w-4 h-4" /> : s.num}
@@ -221,7 +221,7 @@ export default function TechnicianRegistrationPage() {
         </div>
 
         {/* Wizard Form Body */}
-        <div className="bg-white rounded-2xl shadow-xl shadow-slate-200/50 border border-slate-100 p-6 sm:p-8">
+        <div className="bg-white rounded-3xl shadow-card border border-slate-200/80 p-6 sm:p-8">
           {error && (
             <div className="mb-6 p-4 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs flex items-center gap-2.5 animate-fade-in">
               <AlertCircle className="w-4 h-4 shrink-0 text-rose-600" />

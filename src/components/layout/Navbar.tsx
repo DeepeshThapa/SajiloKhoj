@@ -67,35 +67,35 @@ export function Navbar({ initialSession = null }: NavbarProps) {
   };
 
   return (
-    <header className="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200/80 transition-all">
+    <header className="sticky top-0 z-40 bg-white/85 backdrop-blur-md border-b border-slate-200/70 transition-all">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 sm:h-20">
+        <div className="flex items-center justify-between h-16 sm:h-18">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2.5 group">
-            <div className="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white shadow-md shadow-blue-500/20 group-hover:scale-105 transition-transform">
-              <Wrench className="w-5 h-5" />
+            <div className="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center text-white shadow-xs group-hover:scale-105 transition-transform">
+              <Wrench className="w-4 h-4" />
             </div>
             <div className="flex flex-col">
-              <span className="text-xl sm:text-2xl font-black tracking-tight text-slate-900 leading-none">
+              <span className="text-xl font-bold tracking-tight text-slate-900 leading-none">
                 Sajilo<span className="text-blue-600">Khoj</span>
               </span>
-              <span className="text-[10px] font-medium text-slate-400 tracking-wider uppercase mt-0.5">
-                Nepal Services
+              <span className="text-[9px] font-semibold text-slate-400 tracking-wider uppercase mt-0.5">
+                Verified Pros • Nepal
               </span>
             </div>
           </Link>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden md:flex items-center gap-1 lg:gap-2">
+          <nav className="hidden md:flex items-center gap-1">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;
               return (
                 <Link
                   key={link.name}
                   href={link.href}
-                  className={`px-3.5 py-2 rounded-xl text-sm font-semibold transition-all ${
+                  className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold tracking-tight transition-all ${
                     isActive
-                      ? 'bg-blue-50 text-blue-700 font-bold'
+                      ? 'bg-slate-100 text-slate-900 font-bold'
                       : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
                   }`}
                 >
@@ -106,7 +106,7 @@ export function Navbar({ initialSession = null }: NavbarProps) {
           </nav>
 
           {/* Right Action Bar */}
-          <div className="hidden md:flex items-center gap-3">
+          <div className="hidden md:flex items-center gap-2.5">
             {session ? (
               <>
                 {/* Customer Quick Favorites Link */}
@@ -145,7 +145,7 @@ export function Navbar({ initialSession = null }: NavbarProps) {
 
                   {/* Dropdown Card */}
                   {isUserDropdownOpen && (
-                    <div className="absolute right-0 mt-2 w-56 bg-white rounded-2xl shadow-xl border border-slate-100 py-2 z-50 animate-fade-in divide-y divide-slate-100">
+                    <div className="absolute right-0 mt-2 w-56 bg-white rounded-2xl shadow-float border border-slate-200/80 py-2 z-50 animate-fade-in divide-y divide-slate-100">
                       <div className="px-4 py-2.5">
                         <p className="text-xs font-bold text-slate-900 truncate">{session.name}</p>
                         <p className="text-[11px] text-slate-500 truncate">{session.email}</p>
@@ -169,7 +169,7 @@ export function Navbar({ initialSession = null }: NavbarProps) {
                         <Link
                           href={getDashboardUrl()}
                           onClick={() => setIsUserDropdownOpen(false)}
-                          className="flex items-center gap-2.5 px-4 py-2 text-xs font-semibold text-slate-700 hover:text-blue-600 hover:bg-blue-50/50 transition-colors"
+                          className="flex items-center gap-2.5 px-4 py-2 text-xs font-semibold text-slate-700 hover:text-blue-600 hover:bg-slate-50 transition-colors"
                         >
                           <LayoutDashboard className="w-4 h-4 text-slate-400" />
                           Dashboard
@@ -180,7 +180,7 @@ export function Navbar({ initialSession = null }: NavbarProps) {
                             <Link
                               href="/dashboard/customer?tab=requests"
                               onClick={() => setIsUserDropdownOpen(false)}
-                              className="flex items-center gap-2.5 px-4 py-2 text-xs font-semibold text-slate-700 hover:text-blue-600 hover:bg-blue-50/50 transition-colors"
+                              className="flex items-center gap-2.5 px-4 py-2 text-xs font-semibold text-slate-700 hover:text-blue-600 hover:bg-slate-50 transition-colors"
                             >
                               <Calendar className="w-4 h-4 text-slate-400" />
                               My Service Requests
@@ -188,7 +188,7 @@ export function Navbar({ initialSession = null }: NavbarProps) {
                             <Link
                               href="/dashboard/customer?tab=favorites"
                               onClick={() => setIsUserDropdownOpen(false)}
-                              className="flex items-center gap-2.5 px-4 py-2 text-xs font-semibold text-slate-700 hover:text-blue-600 hover:bg-blue-50/50 transition-colors"
+                              className="flex items-center gap-2.5 px-4 py-2 text-xs font-semibold text-slate-700 hover:text-blue-600 hover:bg-slate-50 transition-colors"
                             >
                               <Heart className="w-4 h-4 text-slate-400" />
                               Saved Technicians
@@ -201,7 +201,7 @@ export function Navbar({ initialSession = null }: NavbarProps) {
                             <Link
                               href="/dashboard/technician?tab=requests"
                               onClick={() => setIsUserDropdownOpen(false)}
-                              className="flex items-center gap-2.5 px-4 py-2 text-xs font-semibold text-slate-700 hover:text-teal-600 hover:bg-teal-50/50 transition-colors"
+                              className="flex items-center gap-2.5 px-4 py-2 text-xs font-semibold text-slate-700 hover:text-teal-700 hover:bg-slate-50 transition-colors"
                             >
                               <Briefcase className="w-4 h-4 text-slate-400" />
                               Booking Requests
@@ -209,7 +209,7 @@ export function Navbar({ initialSession = null }: NavbarProps) {
                             <Link
                               href="/dashboard/technician?tab=profile"
                               onClick={() => setIsUserDropdownOpen(false)}
-                              className="flex items-center gap-2.5 px-4 py-2 text-xs font-semibold text-slate-700 hover:text-teal-600 hover:bg-teal-50/50 transition-colors"
+                              className="flex items-center gap-2.5 px-4 py-2 text-xs font-semibold text-slate-700 hover:text-teal-700 hover:bg-slate-50 transition-colors"
                             >
                               <User className="w-4 h-4 text-slate-400" />
                               Profile & Services
@@ -221,7 +221,7 @@ export function Navbar({ initialSession = null }: NavbarProps) {
                           <Link
                             href="/admin"
                             onClick={() => setIsUserDropdownOpen(false)}
-                            className="flex items-center gap-2.5 px-4 py-2 text-xs font-semibold text-slate-700 hover:text-purple-600 hover:bg-purple-50/50 transition-colors"
+                            className="flex items-center gap-2.5 px-4 py-2 text-xs font-semibold text-slate-700 hover:text-blue-600 hover:bg-slate-50 transition-colors"
                           >
                             <Shield className="w-4 h-4 text-slate-400" />
                             Admin Control Panel
@@ -246,21 +246,21 @@ export function Navbar({ initialSession = null }: NavbarProps) {
               <>
                 <Link
                   href="/register/technician"
-                  className="hidden xl:inline-flex items-center gap-1.5 px-3 py-2 text-xs font-bold text-teal-700 bg-teal-50 hover:bg-teal-100 rounded-xl border border-teal-200 transition-colors"
+                  className="hidden xl:inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-teal-800 bg-teal-50 hover:bg-teal-100/80 rounded-xl border border-teal-200/60 transition-colors"
                 >
-                  <Sparkles className="w-3.5 h-3.5" /> Become a Technician
+                  <Sparkles className="w-3.5 h-3.5" /> Become a Pro
                 </Link>
                 <Link
                   href="/login"
-                  className="px-4 py-2 rounded-xl text-sm font-bold text-slate-700 hover:text-slate-900 hover:bg-slate-100 transition-colors"
+                  className="px-3.5 py-1.5 rounded-xl text-xs font-semibold text-slate-700 hover:text-slate-900 hover:bg-slate-100/70 transition-colors"
                 >
-                  Log In
+                  Sign In
                 </Link>
                 <Link
                   href="/register"
-                  className="px-4 py-2 rounded-xl text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 shadow-md shadow-blue-500/20 transition-all hover:scale-[1.02] active:scale-[0.98]"
+                  className="px-4 py-1.5 rounded-xl text-xs font-semibold text-white bg-blue-600 hover:bg-blue-700 shadow-xs transition-all active:scale-[0.98]"
                 >
-                  Register
+                  Get Started
                 </Link>
               </>
             )}

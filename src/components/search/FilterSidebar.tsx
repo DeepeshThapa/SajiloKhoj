@@ -55,16 +55,16 @@ export function FilterSidebar({
   };
 
   return (
-    <aside className="w-full bg-white rounded-2xl border border-slate-200/80 p-5 divide-y divide-slate-100 shadow-xs space-y-5">
+    <aside className="w-full bg-white rounded-3xl border border-slate-200/80 p-5 divide-y divide-slate-100 shadow-card space-y-5">
       {/* Filter Header */}
       <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2 text-slate-900 font-bold text-sm">
+        <div className="flex items-center gap-2 text-slate-900 font-bold text-sm tracking-tight">
           <Filter className="w-4 h-4 text-blue-600" />
-          <span>Filters</span>
+          <span>Filter Pros</span>
         </div>
         <button
           onClick={onReset}
-          className="text-xs font-semibold text-slate-500 hover:text-blue-600 flex items-center gap-1 transition-colors cursor-pointer"
+          className="text-xs font-medium text-slate-400 hover:text-blue-600 flex items-center gap-1 transition-colors cursor-pointer"
         >
           <RotateCcw className="w-3 h-3" /> Reset
         </button>
@@ -72,16 +72,16 @@ export function FilterSidebar({
 
       {/* Category Section */}
       <div className="pt-4">
-        <label className="block text-xs font-bold text-slate-900 uppercase tracking-wider mb-2.5">
+        <label className="block text-[11px] font-bold text-slate-900 uppercase tracking-wider mb-2">
           Service Category
         </label>
         <div className="space-y-1 max-h-56 overflow-y-auto pr-1">
           <button
             type="button"
             onClick={() => onFilterChange({ category: 'all' })}
-            className={`w-full text-left px-3 py-2 rounded-xl text-xs font-semibold flex items-center justify-between transition-colors cursor-pointer ${
+            className={`w-full text-left px-3 py-1.5 rounded-xl text-xs font-medium flex items-center justify-between transition-colors cursor-pointer ${
               !filters.category || filters.category === 'all'
-                ? 'bg-blue-50 text-blue-700 font-bold'
+                ? 'bg-blue-50/80 text-blue-700 font-bold border border-blue-200/60'
                 : 'text-slate-600 hover:bg-slate-50'
             }`}
           >
@@ -97,9 +97,9 @@ export function FilterSidebar({
                 type="button"
                 key={cat.id}
                 onClick={() => onFilterChange({ category: cat.slug })}
-                className={`w-full text-left px-3 py-2 rounded-xl text-xs font-semibold flex items-center justify-between transition-colors cursor-pointer ${
+                className={`w-full text-left px-3 py-1.5 rounded-xl text-xs font-medium flex items-center justify-between transition-colors cursor-pointer ${
                   isSelected
-                    ? 'bg-blue-50 text-blue-700 font-bold'
+                    ? 'bg-blue-50/80 text-blue-700 font-bold border border-blue-200/60'
                     : 'text-slate-600 hover:bg-slate-50'
                 }`}
               >
@@ -113,13 +113,13 @@ export function FilterSidebar({
 
       {/* Location Section */}
       <div className="pt-4">
-        <label className="block text-xs font-bold text-slate-900 uppercase tracking-wider mb-2.5">
+        <label className="block text-[11px] font-bold text-slate-900 uppercase tracking-wider mb-2">
           City / Location
         </label>
         <select
           value={filters.location}
           onChange={(e) => onFilterChange({ location: e.target.value })}
-          className="w-full px-3 py-2 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white"
+          className="w-full px-3 py-2 rounded-xl border border-slate-200 bg-slate-50/60 text-slate-800 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:bg-white"
         >
           {locations.map((loc) => (
             <option key={loc.label} value={loc.value}>
@@ -131,8 +131,8 @@ export function FilterSidebar({
 
       {/* Starting Price Presets */}
       <div className="pt-4">
-        <label className="block text-xs font-bold text-slate-900 uppercase tracking-wider mb-2.5">
-          Starting Price
+        <label className="block text-[11px] font-bold text-slate-900 uppercase tracking-wider mb-2">
+          Starting Rate
         </label>
         <div className="flex flex-wrap gap-1.5">
           {pricePresets.map((preset) => {
@@ -142,10 +142,10 @@ export function FilterSidebar({
                 key={preset.id}
                 type="button"
                 onClick={() => handlePricePresetClick(preset)}
-                className={`px-2.5 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
+                className={`px-2.5 py-1.5 rounded-lg text-xs font-medium transition-all cursor-pointer ${
                   isSelected
-                    ? 'bg-blue-600 text-white shadow-xs'
-                    : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                    ? 'bg-slate-900 text-white shadow-2xs font-semibold'
+                    : 'bg-slate-100/80 text-slate-600 hover:bg-slate-200/80'
                 }`}
               >
                 {preset.label}
@@ -157,15 +157,15 @@ export function FilterSidebar({
 
       {/* Minimum Rating */}
       <div className="pt-4">
-        <label className="block text-xs font-bold text-slate-900 uppercase tracking-wider mb-2.5">
+        <label className="block text-[11px] font-bold text-slate-900 uppercase tracking-wider mb-2">
           Minimum Rating
         </label>
-        <div className="space-y-1.5">
+        <div className="space-y-1">
           {[
             { label: 'Any Rating', value: undefined },
-            { label: '4.5+ Stars ⭐⭐⭐⭐⭐', value: 4.5 },
-            { label: '4.0+ Stars ⭐⭐⭐⭐', value: 4.0 },
-            { label: '3.0+ Stars ⭐⭐⭐', value: 3.0 },
+            { label: '4.5+ Stars (Top Rated)', value: 4.5 },
+            { label: '4.0+ Stars', value: 4.0 },
+            { label: '3.0+ Stars', value: 3.0 },
           ].map((r) => {
             const isSelected = filters.minRating === r.value;
             return (
@@ -173,8 +173,8 @@ export function FilterSidebar({
                 key={r.label}
                 type="button"
                 onClick={() => onFilterChange({ minRating: r.value })}
-                className={`w-full text-left px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center justify-between transition-colors cursor-pointer ${
-                  isSelected ? 'bg-blue-50 text-blue-700' : 'text-slate-600 hover:bg-slate-50'
+                className={`w-full text-left px-3 py-1.5 rounded-xl text-xs font-medium flex items-center justify-between transition-colors cursor-pointer ${
+                  isSelected ? 'bg-blue-50/80 text-blue-700 font-bold border border-blue-200/60' : 'text-slate-600 hover:bg-slate-50'
                 }`}
               >
                 <span>{r.label}</span>
@@ -187,7 +187,7 @@ export function FilterSidebar({
 
       {/* Experience */}
       <div className="pt-4">
-        <label className="block text-xs font-bold text-slate-900 uppercase tracking-wider mb-2.5">
+        <label className="block text-[11px] font-bold text-slate-900 uppercase tracking-wider mb-2">
           Experience Level
         </label>
         <div className="grid grid-cols-2 gap-1.5">
@@ -203,10 +203,10 @@ export function FilterSidebar({
                 key={exp.label}
                 type="button"
                 onClick={() => onFilterChange({ minExperience: exp.value })}
-                className={`px-2.5 py-1.5 rounded-lg text-xs font-semibold text-center transition-colors cursor-pointer ${
+                className={`px-2.5 py-1.5 rounded-lg text-xs font-medium text-center transition-colors cursor-pointer ${
                   isSelected
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                    ? 'bg-slate-900 text-white font-semibold'
+                    : 'bg-slate-100/80 text-slate-600 hover:bg-slate-200/80'
                 }`}
               >
                 {exp.label}
@@ -218,7 +218,7 @@ export function FilterSidebar({
 
       {/* Availability */}
       <div className="pt-4">
-        <label className="block text-xs font-bold text-slate-900 uppercase tracking-wider mb-2.5">
+        <label className="block text-[11px] font-bold text-slate-900 uppercase tracking-wider mb-2">
           Availability
         </label>
         <div className="space-y-1">
@@ -234,8 +234,8 @@ export function FilterSidebar({
                 key={av.label}
                 type="button"
                 onClick={() => onFilterChange({ availability: av.value })}
-                className={`w-full text-left px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center justify-between transition-colors cursor-pointer ${
-                  isSelected ? 'bg-blue-50 text-blue-700' : 'text-slate-600 hover:bg-slate-50'
+                className={`w-full text-left px-3 py-1.5 rounded-xl text-xs font-medium flex items-center justify-between transition-colors cursor-pointer ${
+                  isSelected ? 'bg-blue-50/80 text-blue-700 font-bold border border-blue-200/60' : 'text-slate-600 hover:bg-slate-50'
                 }`}
               >
                 <span>{av.label}</span>
